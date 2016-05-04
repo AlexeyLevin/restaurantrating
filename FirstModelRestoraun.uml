@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.alev.model</OriginalElement>
+  <nodes>
+    <node x="357.5306002682763" y="424.69081153588195">com.alev.model.Vote</node>
+    <node x="17.0" y="277.0">com.alev.model.User</node>
+    <node x="0.0" y="138.5">com.alev.model.abtractclass.Role</node>
+    <node x="494.0291343108993" y="267.47883092833655">com.alev.model.LunchMenu</node>
+    <node x="241.55447299678644"     y="290.42754423680407">com.alev.model.Restaurant</node>
+    <node x="392.0144425796957" y="149.75794408368577">com.alev.model.abtractclass.BaseEntity</node>
+    <node x="604.6443661971831" y="423.08253728091904">com.alev.model.Dish</node>
+    <node x="193.75" y="150.0">com.alev.model.abtractclass.NamedEntity</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.alev.model.abtractclass.NamedEntity" target="com.alev.model.abtractclass.BaseEntity">
+      <point x="0.0" y="-27.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.alev.model.LunchMenu" target="com.alev.model.Dish">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.alev.model.Restaurant" target="com.alev.model.LunchMenu">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.alev.model.User" target="com.alev.model.abtractclass.NamedEntity">
+      <point x="51.0" y="-73.0" />
+      <point x="170.0" y="252.0" />
+      <point x="225.75" y="252.0" />
+      <point x="-32.0" y="27.0" />
+    </edge>
+    <edge source="com.alev.model.Restaurant" target="com.alev.model.abtractclass.NamedEntity">
+      <point x="-48.75" y="-27.0" />
+      <point x="32.0" y="27.0" />
+    </edge>
+    <edge source="com.alev.model.Vote" target="com.alev.model.LunchMenu">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.alev.model.User" target="com.alev.model.abtractclass.Role">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.alev.model.Vote" target="com.alev.model.Restaurant">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8878467635402907" x="391.0389822943014" y="368.60630858503197" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
