@@ -14,6 +14,9 @@ import java.io.UnsupportedEncodingException;
  */
 public class TestUtil {
 
+    private TestUtil() {
+    }
+
     public static ResultActions print(ResultActions action) throws UnsupportedEncodingException {
         System.out.println(getContent(action));
         return action;

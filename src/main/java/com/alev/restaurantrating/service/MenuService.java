@@ -5,13 +5,14 @@ import com.alev.restaurantrating.model.LunchMenu;
 import java.util.Collection;
 
 public interface MenuService {
-    LunchMenu get(int id);
 
-    void delete(int id);
+    LunchMenu get(int id, int restaurantId);
 
-    Collection<LunchMenu> getAll();
+    void delete(int id, int restaurantId);
 
-    LunchMenu save(LunchMenu lunchMenu);
+    Collection<LunchMenu> getAll(int restaurantId);
 
-    LunchMenu update(LunchMenu lunchMenu);
+    LunchMenu save(LunchMenu lunchMenu, int restaurantId);
+
+    LunchMenu update(LunchMenu lunchMenu, int restaurantId);
 }

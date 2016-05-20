@@ -1,8 +1,12 @@
 package com.alev.restaurantrating.service;
 
-import com.alev.restaurantrating.model.LunchMenu;
+import com.alev.restaurantrating.model.Vote;
 
 public interface VoteService {
-    void addVote(LunchMenu restaurantMenu);
-    void deleteVote(LunchMenu restaurantMenu);
+
+    Vote get(int id, int userId);
+
+    Vote save(Vote vote, int userId);
+
+    void delete(int id, int userId);
 }

@@ -1,8 +1,5 @@
 package com.alev.restaurantrating.model;
 
-import com.alev.restaurantrating.model.abtractclass.NamedEntity;
-import com.alev.restaurantrating.model.abtractclass.Role;
-
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
@@ -25,6 +22,7 @@ public class User extends NamedEntity {
 
     protected Set<Role> roles;
 
+    private Vote todayVote;
     private List<Vote> votes;
 
     public User() {
