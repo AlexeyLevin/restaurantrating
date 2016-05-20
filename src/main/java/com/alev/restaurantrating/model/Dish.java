@@ -8,7 +8,7 @@ public class Dish {
 
     public Dish(String name, BigDecimal price) {
         this.name = name;
-        this.price = price;
+        this.price = price.setScale(2, BigDecimal.ROUND_HALF_EVEN);
     }
 
     public String getName() {

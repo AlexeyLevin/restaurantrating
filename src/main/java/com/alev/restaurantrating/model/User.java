@@ -80,6 +80,22 @@ public class User extends NamedEntity {
         return password;
     }
 
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public Vote getTodayVote() {
+        return todayVote;
+    }
+
+    public void setTodayVote(Vote todayVote) {
+        this.todayVote = todayVote;
+    }
+
     @Override
     public String toString() {
         return "User (" +
