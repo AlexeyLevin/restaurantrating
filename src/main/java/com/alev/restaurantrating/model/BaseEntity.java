@@ -1,4 +1,4 @@
-package com.alev.restaurantrating.model.abtractclass;
+package com.alev.restaurantrating.model;
 
 public class BaseEntity {
     public static final int START_SEQ = 100000;

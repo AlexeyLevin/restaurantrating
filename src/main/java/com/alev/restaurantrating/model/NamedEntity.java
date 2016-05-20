@@ -1,4 +1,4 @@
-package com.alev.restaurantrating.model.abtractclass;
+package com.alev.restaurantrating.model;
 
 public class NamedEntity extends BaseEntity {
 

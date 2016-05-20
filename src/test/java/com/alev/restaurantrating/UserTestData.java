@@ -2,15 +2,18 @@ package com.alev.restaurantrating;
 
 import com.alev.restaurantrating.matcher.ModelMatcher;
 import com.alev.restaurantrating.model.User;
-import com.alev.restaurantrating.model.abtractclass.Role;
+import com.alev.restaurantrating.model.Role;
 
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.alev.restaurantrating.model.abtractclass.BaseEntity.START_SEQ;
+import static com.alev.restaurantrating.model.BaseEntity.START_SEQ;
 
 public class UserTestData {
+    private UserTestData() {
+    }
+
     public static final int USER_ID = START_SEQ;
     public static final int ADMIN_ID = START_SEQ + 1;
 
