@@ -42,4 +42,13 @@ public class Restaurant {
     public void setMenuDate(LocalDate menuDate) {
         this.menuDate = menuDate;
     }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "name='" + name + '\'' +
+                ", lunchMenu=" + lunchMenu +
+                ", menuDate=" + menuDate +
+                '}';
+    }
 }

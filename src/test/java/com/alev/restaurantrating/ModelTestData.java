@@ -12,8 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ModelTestData {
+
     private ModelTestData() {
     }
+
     public static final List<Dish> DISH_LIST_1 = Arrays.asList(
             new Dish("Barbados soup", new BigDecimal(2)),
             new Dish("Barbados salad", new BigDecimal(0.5)),
@@ -43,9 +45,15 @@ public class ModelTestData {
     public static final Restaurant TEST_RESTAURANT_2 = new Restaurant("Ragnarok", LUNCH_MENU_2);
     public static final Restaurant TEST_RESTAURANT_3 = new Restaurant("Saran", LUNCH_MENU_3);
 
-    public static final List<Vote> voteList = Arrays.asList(
-            new Vote(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), TEST_RESTAURANT_1, LUNCH_MENU_1, true),
-            new Vote(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), TEST_RESTAURANT_2, LUNCH_MENU_2, true),
-            new Vote(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), TEST_RESTAURANT_3, LUNCH_MENU_3, true)
+    public static final List<Vote> USER_VOTE_LIST = Arrays.asList(
+            new Vote(LocalDateTime.of(2016, Month.MAY, 29, 10, 0), TEST_RESTAURANT_1, LUNCH_MENU_1, true),
+            new Vote(LocalDateTime.of(2016, Month.MAY, 30, 10, 0), TEST_RESTAURANT_2, LUNCH_MENU_2, true),
+            new Vote(LocalDateTime.of(2016, Month.MAY, 31, 10, 0), TEST_RESTAURANT_3, LUNCH_MENU_3, true)
+    );
+
+    public static final List<Vote> ADMIN_VOTE_LIST = Arrays.asList(
+            new Vote(LocalDateTime.of(2016, Month.MAY, 29, 10, 0), TEST_RESTAURANT_3, LUNCH_MENU_3, true),
+            new Vote(LocalDateTime.of(2016, Month.MAY, 30, 10, 0), TEST_RESTAURANT_2, LUNCH_MENU_2, true),
+            new Vote(LocalDateTime.of(2016, Month.MAY, 31, 10, 0), TEST_RESTAURANT_1, LUNCH_MENU_1, true)
     );
 }

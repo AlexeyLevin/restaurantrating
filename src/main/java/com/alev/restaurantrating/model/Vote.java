@@ -12,6 +12,8 @@ public class Vote extends BaseEntity {
 
     private boolean isVoted;
 
+    private User user;
+
     public Vote(LocalDateTime voteDateTime, Restaurant restaurant, LunchMenu lunchMenu, boolean isVoted) {
         this.voteDateTime = voteDateTime;
         this.restaurant = restaurant;
@@ -49,5 +51,23 @@ public class Vote extends BaseEntity {
 
     public void setVoted(boolean voted) {
         isVoted = voted;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "voteDateTime=" + voteDateTime +
+                ", restaurant=" + restaurant +
+                ", lunchMenu=" + lunchMenu +
+                ", isVoted=" + isVoted +
+                '}';
     }
 }
