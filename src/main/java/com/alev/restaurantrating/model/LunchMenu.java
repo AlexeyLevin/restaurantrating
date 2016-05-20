@@ -52,4 +52,14 @@ public class LunchMenu {
     public void setMenuDate(LocalDate menuDate) {
         this.menuDate = menuDate;
     }
+
+    @Override
+    public String toString() {
+        return "LunchMenu{" +
+                "name='" + name + '\'' +
+                ", dishList=" + dishList +
+                ", menuDate=" + menuDate +
+                ", restaurant=" + restaurant +
+                '}';
+    }
 }
