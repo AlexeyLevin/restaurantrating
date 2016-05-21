@@ -1,21 +1,17 @@
 package com.alev.restaurantrating.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
-public class LunchMenu {
-    private String name;
+public class LunchMenu extends NamedEntity {
+
     private List<Dish> dishList;
     private Restaurant restaurant;
+    private LocalDate menuDate;
 
-    public LunchMenu(String name, List<Dish> dishList) {
-        this.name = name;
-        this.dishList = dishList;
-    }
-
-    public LunchMenu(String name, List<Dish> dishList, Restaurant restaurant) {
-        this.name = name;
-        this.dishList = dishList;
-        this.restaurant = restaurant;
+    public LunchMenu(Integer id, String name, LocalDate menuDate) {
+        super(id, name);
+        this.menuDate = menuDate;
     }
 
     public String getName() {
@@ -40,6 +36,14 @@ public class LunchMenu {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public LocalDate getMenuDate() {
+        return menuDate;
+    }
+
+    public void setMenuDate(LocalDate menuDate) {
+        this.menuDate = menuDate;
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.alev.restaurantrating.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Vote extends BaseEntity {
 
-    private LocalDateTime voteDateTime;
+    private LocalDate voteDateTime;
 
     private Restaurant restaurant;
 
@@ -14,18 +14,18 @@ public class Vote extends BaseEntity {
 
     private User user;
 
-    public Vote(LocalDateTime voteDateTime, Restaurant restaurant, LunchMenu lunchMenu, boolean isVoted) {
+    public Vote(LocalDate voteDateTime, Restaurant restaurant, LunchMenu lunchMenu, boolean isVoted) {
         this.voteDateTime = voteDateTime;
         this.restaurant = restaurant;
         this.lunchMenu = lunchMenu;
         this.isVoted = isVoted;
     }
 
-    public LocalDateTime getVoteDateTime() {
+    public LocalDate getVoteDateTime() {
         return voteDateTime;
     }
 
-    public void setVoteDateTime(LocalDateTime voteDateTime) {
+    public void setVoteDateTime(LocalDate voteDateTime) {
         this.voteDateTime = voteDateTime;
     }
 
