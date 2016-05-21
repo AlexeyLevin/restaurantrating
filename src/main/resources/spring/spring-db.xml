@@ -13,26 +13,12 @@
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
 
-    <!-- Change DB by comment/uncomment property-placeholder -->
-
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="classpath:db/${jdbc.initLocation}"/>
         <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
     </jdbc:initialize-database>
 
     <tx:annotation-driven/>
-
-    <beans profile="hsqldb">
-        <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
-
-        <!--no pooling-->
-        <bean id="dataSource"
-              class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-              p:driverClassName="org.hsqldb.jdbcDriver"
-              p:url="${database.url}"
-              p:username="${database.username}"
-              p:password="${database.password}"/>
-    </beans>
 
     <beans profile="postgres">
         <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
@@ -50,47 +36,42 @@
         <!--<context:property-placeholder location="classpath:db/tomcat.properties" system-properties-mode="OVERRIDE"/>-->
     <!--</beans>-->
 
-    <!--<beans profile="datajpa,jpa">-->
-        <!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"-->
-              <!--p:dataSource-ref="dataSource"-->
-              <!--p:packagesToScan="ru.javawebinar.**.model">-->
-            <!--&lt;!&ndash;p:persistenceUnitName="persistenceUnit">&ndash;&gt;-->
+    <beans profile="datajpa">
+        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+              p:dataSource-ref="dataSource"
+              p:packagesToScan="ru.javawebinar.**.model">
+            <!--p:persistenceUnitName="persistenceUnit">-->
 
-            <!--<property name="jpaPropertyMap">-->
-                <!--<map>-->
-                    <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>-->
-                    <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}" value="${hibernate.use_sql_comments}"/>-->
-                    <!--&lt;!&ndash;<entry key="#{T(org.hibernate.cfg.AvailableSettings).HBM2DDL_AUTO}" value="${hibernate.hbm2ddl.auto}"/>&ndash;&gt;-->
+            <property name="jpaPropertyMap">
+                <map>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}" value="${hibernate.use_sql_comments}"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).CACHE_REGION_FACTORY}" value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SECOND_LEVEL_CACHE}" value="true"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_QUERY_CACHE}" value="false"/> <!--default-->
+                    <entry key="#{T(org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory).NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME}" value="cache/ehcache.xml"/>
 
-                    <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).CACHE_REGION_FACTORY}" value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory"/>-->
-                    <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SECOND_LEVEL_CACHE}" value="true"/>-->
-                    <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_QUERY_CACHE}" value="false"/> &lt;!&ndash;default&ndash;&gt;-->
-                    <!--<entry key="#{T(org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory).NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME}" value="cache/ehcache.xml"/>-->
+<!--
+                    <entry key="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
+                    <entry key="javax.persistence.schema-generation.scripts.create-target" value="${TOPJAVA_ROOT}/config/ddl/create.ddl"/>
+                    <entry key="javax.persistence.schema-generation.scripts.drop-target" value="${TOPJAVA_ROOT}/config/ddl/drop.ddl"/>
+-->
+                </map>
+            </property>
 
-<!--&lt;!&ndash;-->
-                    <!--<entry key="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>-->
-                    <!--<entry key="javax.persistence.schema-generation.scripts.create-target" value="${TOPJAVA_ROOT}/config/ddl/create.ddl"/>-->
-                    <!--<entry key="javax.persistence.schema-generation.scripts.drop-target" value="${TOPJAVA_ROOT}/config/ddl/drop.ddl"/>-->
-<!--&ndash;&gt;-->
-                <!--</map>-->
-            <!--</property>-->
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+                      p:showSql="${jpa.showSql}">
+                </bean>
+            </property>
+        </bean>
 
-            <!--<property name="jpaVendorAdapter">-->
-                <!--<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"-->
-                      <!--p:showSql="${jpa.showSql}">-->
-                <!--</bean>-->
-            <!--</property>-->
-        <!--</bean>-->
+        <!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
+        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+              p:entityManagerFactory-ref="entityManagerFactory"/>
 
-        <!--&lt;!&ndash; Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) &ndash;&gt;-->
-        <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"-->
-              <!--p:entityManagerFactory-ref="entityManagerFactory"/>-->
-
-        <!--<bean class="ru.javawebinar.topjava.repository.JpaUtil"/>-->
-    <!--</beans>-->
-
-    <!--<beans profile="datajpa">-->
-        <!--<context:component-scan base-package="ru.javawebinar.**.repository.datajpa"/>-->
-        <!--<jpa:repositories base-package="ru.javawebinar.**.repository.datajpa"/>-->
-    <!--</beans>-->
+        <bean class="com.alev.restaurantrating.repository.JpaUtil"/>
+        <context:component-scan base-package="com.alev.restaurantrating.**.repository.datajpa"/>
+        <jpa:repositories base-package="com.alev.restaurantrating.**.repository.datajpa"/>
+    </beans>
 </beans>
