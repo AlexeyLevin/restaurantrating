@@ -1,4 +1,4 @@
-package com.alev.restaurantrating.mock;
+package com.alev.restaurantrating.repository.mock;
 
 import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.repository.UserRepository;

@@ -1,9 +1,11 @@
 package com.alev.restaurantrating.web.user;
 
 import com.alev.restaurantrating.model.User;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+@Controller
 public class AdminRestController extends AbstractUserController {
 
     public List<User> getAll() {

@@ -2,7 +2,9 @@ package com.alev.restaurantrating.web.user;
 
 import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.web.LoggedUser;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class ProfileRestController extends AbstractUserController {
 
     public User get() {
