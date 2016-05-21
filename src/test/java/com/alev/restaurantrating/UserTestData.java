@@ -1,8 +1,8 @@
 package com.alev.restaurantrating;
 
 import com.alev.restaurantrating.matcher.ModelMatcher;
-import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.model.Role;
+import com.alev.restaurantrating.model.User;
 
 import java.util.EnumSet;
 import java.util.Objects;

@@ -49,10 +49,10 @@ public class ModelTestData {
     );
 
     public static final Restaurant TEST_RESTAURANT_1 = new Restaurant(BARBADOS_ID, "Barbados");
-    public static final Restaurant TEST_RESTAURANT_2 = new Restaurant(RAGNAROK_ID,"Ragnarok");
+    public static final Restaurant TEST_RESTAURANT_2 = new Restaurant(RAGNAROK_ID, "Ragnarok");
     public static final Restaurant TEST_RESTAURANT_3 = new Restaurant(SARAN_ID, "Saran");
 
-    public static final LunchMenu LUNCH_MENU_1 = new LunchMenu(BARBADOS_MENU_ID, "Barbados menu", VOTE_DAY );
+    public static final LunchMenu LUNCH_MENU_1 = new LunchMenu(BARBADOS_MENU_ID, "Barbados menu", VOTE_DAY);
     public static final LunchMenu LUNCH_MENU_2 = new LunchMenu(RAGNAROK_MENU_ID, "Ragnarok menu", VOTE_DAY);
     public static final LunchMenu LUNCH_MENU_3 = new LunchMenu(SARAN_MENU_ID, "Saran menu", NEXT_VOTE_DAY);
 

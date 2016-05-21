@@ -43,7 +43,6 @@ public class Vote extends BaseEntity {
     }
 
 
-
     public User getUser() {
         return user;
     }

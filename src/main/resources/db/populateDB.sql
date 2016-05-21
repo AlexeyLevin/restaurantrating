@@ -28,20 +28,20 @@ INSERT INTO menus ("id", "restauran_id", "name", "menu_date") VALUES
 
 
 INSERT INTO dishes ("menu_id", "name", "price") VALUES
-  (100005,'Barbados soup', 2),
-  (100005,'Barbados salad', 0.5),
-  (100005,'Barbados meat', 2.5),
-  (100005,'Barbados coffee', 0.2),
+  (100005, 'Barbados soup', 2),
+  (100005, 'Barbados salad', 0.5),
+  (100005, 'Barbados meat', 2.5),
+  (100005, 'Barbados coffee', 0.2),
 
-  (100006,'Ragnarok soup', 1.5),
-  (100006,'Ragnarok salad', 0.3),
-  (100006,'Ragnarok meat', 2),
-  (100006,'Ragnarok coffee', 0.1),
+  (100006, 'Ragnarok soup', 1.5),
+  (100006, 'Ragnarok salad', 0.3),
+  (100006, 'Ragnarok meat', 2),
+  (100006, 'Ragnarok coffee', 0.1),
 
-  (100007,'Saran soup', 1.5),
-  (100007,'Saran salad', 0.3),
-  (100007,'Saran meat', 2),
-  (100007,'Saran coffee', 0.1);
+  (100007, 'Saran soup', 1.5),
+  (100007, 'Saran salad', 0.3),
+  (100007, 'Saran meat', 2),
+  (100007, 'Saran coffee', 0.1);
 
 INSERT INTO votes ("user_id", "vote_date", "restauran_id", "menu_id") VALUES
   (100000, '2016-05-30', 100002, 100005),
