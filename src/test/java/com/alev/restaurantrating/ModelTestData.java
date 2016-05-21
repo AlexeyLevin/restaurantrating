@@ -18,9 +18,11 @@ public class ModelTestData {
     public static final int BARBADOS_ID = START_SEQ + 2;
     public static final int RAGNAROK_ID = START_SEQ + 3;
     public static final int SARAN_ID = START_SEQ + 4;
-    public static final int BARBADOS_DISH_ID = START_SEQ + 5;
-    public static final int RAGNAROK_DISH_ID = START_SEQ + 6;
-    public static final int SARAN_DISH_ID = START_SEQ + 7;
+    public static final int BARBADOS_MENU_ID = START_SEQ + 5;
+    public static final int RAGNAROK_MENU_ID = START_SEQ + 6;
+    public static final int SARAN_MENU_ID = START_SEQ + 7;
+    public static final LocalDate VOTE_DAY = LocalDate.of(2016, Month.MAY, 30);
+    public static final LocalDate NEXT_VOTE_DAY = LocalDate.of(2016, Month.MAY, 31);
 
     private ModelTestData() {
     }
@@ -50,19 +52,17 @@ public class ModelTestData {
     public static final Restaurant TEST_RESTAURANT_2 = new Restaurant(RAGNAROK_ID,"Ragnarok");
     public static final Restaurant TEST_RESTAURANT_3 = new Restaurant(SARAN_ID, "Saran");
 
-    public static final LunchMenu LUNCH_MENU_1 = new LunchMenu(BARBADOS_DISH_ID, "Barbados menu",  LocalDate.of(2016, Month.MAY, 29));
-    public static final LunchMenu LUNCH_MENU_2 = new LunchMenu(RAGNAROK_DISH_ID, "Ragnarok menu", LocalDate.of(2016, Month.MAY, 30));
-    public static final LunchMenu LUNCH_MENU_3 = new LunchMenu(SARAN_DISH_ID, "Saran menu", LocalDate.of(2016, Month.MAY, 31));
+    public static final LunchMenu LUNCH_MENU_1 = new LunchMenu(BARBADOS_MENU_ID, "Barbados menu", VOTE_DAY );
+    public static final LunchMenu LUNCH_MENU_2 = new LunchMenu(RAGNAROK_MENU_ID, "Ragnarok menu", VOTE_DAY);
+    public static final LunchMenu LUNCH_MENU_3 = new LunchMenu(SARAN_MENU_ID, "Saran menu", NEXT_VOTE_DAY);
 
     public static final List<Vote> USER_VOTE_LIST = Arrays.asList(
-            new Vote(LocalDate.of(2016, Month.MAY, 29), TEST_RESTAURANT_1, LUNCH_MENU_1, true),
-            new Vote(LocalDate.of(2016, Month.MAY, 30), TEST_RESTAURANT_2, LUNCH_MENU_2, true),
-            new Vote(LocalDate.of(2016, Month.MAY, 31), TEST_RESTAURANT_3, LUNCH_MENU_3, true)
+            new Vote(VOTE_DAY, TEST_RESTAURANT_1, LUNCH_MENU_1),
+            new Vote(NEXT_VOTE_DAY, TEST_RESTAURANT_3, LUNCH_MENU_3)
     );
 
     public static final List<Vote> ADMIN_VOTE_LIST = Arrays.asList(
-            new Vote(LocalDate.of(2016, Month.MAY, 29), TEST_RESTAURANT_3, LUNCH_MENU_3, true),
-            new Vote(LocalDate.of(2016, Month.MAY, 30), TEST_RESTAURANT_2, LUNCH_MENU_2, true),
-            new Vote(LocalDate.of(2016, Month.MAY, 31), TEST_RESTAURANT_1, LUNCH_MENU_1, true)
+            new Vote(VOTE_DAY, TEST_RESTAURANT_2, LUNCH_MENU_2),
+            new Vote(NEXT_VOTE_DAY, TEST_RESTAURANT_3, LUNCH_MENU_3)
     );
 }

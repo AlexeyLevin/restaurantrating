@@ -10,15 +10,12 @@ public class Vote extends BaseEntity {
 
     private LunchMenu lunchMenu;
 
-    private boolean isVoted;
-
     private User user;
 
-    public Vote(LocalDate voteDateTime, Restaurant restaurant, LunchMenu lunchMenu, boolean isVoted) {
+    public Vote(LocalDate voteDateTime, Restaurant restaurant, LunchMenu lunchMenu) {
         this.voteDateTime = voteDateTime;
         this.restaurant = restaurant;
         this.lunchMenu = lunchMenu;
-        this.isVoted = isVoted;
     }
 
     public LocalDate getVoteDateTime() {
@@ -45,13 +42,7 @@ public class Vote extends BaseEntity {
         this.lunchMenu = lunchMenu;
     }
 
-    public boolean isVoted() {
-        return isVoted;
-    }
 
-    public void setVoted(boolean voted) {
-        isVoted = voted;
-    }
 
     public User getUser() {
         return user;
@@ -67,7 +58,6 @@ public class Vote extends BaseEntity {
                 "voteDateTime=" + voteDateTime +
                 ", restaurant=" + restaurant +
                 ", lunchMenu=" + lunchMenu +
-                ", isVoted=" + isVoted +
                 '}';
     }
 }
