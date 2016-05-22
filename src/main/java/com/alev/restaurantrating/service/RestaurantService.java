@@ -1,17 +1,22 @@
 package com.alev.restaurantrating.service;
 
 import com.alev.restaurantrating.model.Restaurant;
+import com.alev.restaurantrating.util.exceptions.NotFoundException;
 
-import java.util.Collection;
+import java.util.List;
+
 
 public interface RestaurantService {
-    Restaurant get(int id);
-
-    void delete(int id);
-
-    Collection<Restaurant> getAll();
 
     Restaurant save(Restaurant restaurant);
 
-    Restaurant update(Restaurant restaurant);
+    void delete(int id) throws NotFoundException;;
+
+    Restaurant get(int id) throws NotFoundException;;
+
+    Restaurant getByName(String name) throws NotFoundException;
+
+    void update(Restaurant restaurant);
+
+    List<Restaurant> getAll();
 }

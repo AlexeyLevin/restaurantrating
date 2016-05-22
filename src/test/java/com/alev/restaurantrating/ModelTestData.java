@@ -1,5 +1,6 @@
 package com.alev.restaurantrating;
 
+import com.alev.restaurantrating.matcher.ModelMatcher;
 import com.alev.restaurantrating.model.Dish;
 import com.alev.restaurantrating.model.LunchMenu;
 import com.alev.restaurantrating.model.Restaurant;
@@ -11,6 +12,7 @@ import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.alev.restaurantrating.TestUtil.*;
 import static com.alev.restaurantrating.model.BaseEntity.START_SEQ;
 
 public class ModelTestData {
@@ -23,7 +25,7 @@ public class ModelTestData {
     public static final int SARAN_MENU_ID = START_SEQ + 7;
     public static final LocalDate VOTE_DAY = LocalDate.of(2016, Month.MAY, 30);
     public static final LocalDate NEXT_VOTE_DAY = LocalDate.of(2016, Month.MAY, 31);
-    //public static final ModelMatcher<User, String> MATCHER = new ToStringModelMatcher<>(Vote.class);
+    public static final ModelMatcher<Restaurant, String> RESTAURANT_MATCHER = new ToStringModelMatcher<>(Restaurant.class);
 
     private ModelTestData() {
     }
