@@ -1,6 +1,5 @@
 package com.alev.restaurantrating.repository;
 
-
 import com.alev.restaurantrating.model.User;
 
 import java.util.List;

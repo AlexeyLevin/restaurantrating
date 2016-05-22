@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 /**
- * GKislin
- * 06.01.2015.
  *
  * @param <T> : entity
  * @param <R> : testEntity, converter result for compare

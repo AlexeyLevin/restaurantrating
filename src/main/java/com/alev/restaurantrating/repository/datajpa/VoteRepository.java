@@ -1,4 +1,4 @@
-package com.alev.restaurantrating.repository;
+package com.alev.restaurantrating.repository.datajpa;
 
 import com.alev.restaurantrating.model.Vote;
 

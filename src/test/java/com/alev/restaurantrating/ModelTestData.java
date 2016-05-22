@@ -23,6 +23,7 @@ public class ModelTestData {
     public static final int SARAN_MENU_ID = START_SEQ + 7;
     public static final LocalDate VOTE_DAY = LocalDate.of(2016, Month.MAY, 30);
     public static final LocalDate NEXT_VOTE_DAY = LocalDate.of(2016, Month.MAY, 31);
+    //public static final ModelMatcher<User, String> MATCHER = new ToStringModelMatcher<>(Vote.class);
 
     private ModelTestData() {
     }

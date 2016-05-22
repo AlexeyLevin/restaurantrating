@@ -4,10 +4,6 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import com.alev.restaurantrating.web.json.JsonUtil;
 
-/**
- * GKislin
- * 05.01.2015.
- */
 abstract public class TestMatcher<T> extends BaseMatcher<String> {
     protected T expected;
 

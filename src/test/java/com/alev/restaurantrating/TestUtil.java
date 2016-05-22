@@ -8,10 +8,6 @@ import com.alev.restaurantrating.model.User;
 
 import java.io.UnsupportedEncodingException;
 
-/**
- * GKislin
- * 05.01.2015.
- */
 public class TestUtil {
 
     private TestUtil() {
