@@ -45,7 +45,7 @@
                     <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).HBM2DDL_AUTO}" value="${hibernate.hbm2ddl.auto}"/>-->
 
                     <entry key="#{T(org.hibernate.cfg.AvailableSettings).CACHE_REGION_FACTORY}" value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory"/>
-                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SECOND_LEVEL_CACHE}" value="true"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SECOND_LEVEL_CACHE}" value="false"/>
                     <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_QUERY_CACHE}" value="false"/> <!--default-->
                     <entry key="#{T(org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory).NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME}" value="cache/ehcache.xml"/>
 

@@ -1,5 +1,6 @@
 package com.alev.restaurantrating.service;
 
+import com.alev.restaurantrating.repository.JpaUtil;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +9,17 @@ import com.alev.restaurantrating.UserTestData.*;
 import com.alev.restaurantrating.model.Role;
 import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.util.exceptions.NotFoundException;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import static com.alev.restaurantrating.Profiles.DATAJPA;
 import static com.alev.restaurantrating.UserTestData.*;
 
-abstract public class AbstractUserServiceTest extends AbstractServiceTest {
+@ActiveProfiles(DATAJPA)
+public class UserServiceTest extends AbstractServiceTest {
 
     @Autowired
     protected UserService service;
@@ -23,6 +27,7 @@ abstract public class AbstractUserServiceTest extends AbstractServiceTest {
     @After
     public void tearDown() throws Exception {
         service.evictCache();
+        jpaUtil.clear2ndLevelHibernateCache();
     }
 
     @Test
@@ -79,5 +84,22 @@ abstract public class AbstractUserServiceTest extends AbstractServiceTest {
         updated.setRoles(Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_USER));
         service.update(updated.asUser());
         MATCHER.assertEquals(updated, service.get(USER_ID));
+    }
+
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    @Autowired
+    private JpaUtil jpaUtil;
+
+//    @Test
+//    public void testGetWithMeals() throws Exception {
+//        User user = service.getWithVotes(USER_ID);
+//        MATCHER.assertEquals(USER, user);
+//        ModelTestData.MATCHER.assertCollectionEquals(MealTestData.USER_VOTES, user.getVotes());
+//    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    //@Test(expected = NotFoundException.class)
+    public void testGetWithMealsNotFound() throws Exception {
+        service.getWithVotes(1);
     }
 }
