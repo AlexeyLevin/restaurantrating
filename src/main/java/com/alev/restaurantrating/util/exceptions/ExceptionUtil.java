@@ -1,10 +1,5 @@
 package com.alev.restaurantrating.util.exceptions;
 
-
-/**
- * User: gkislin
- * Date: 14.05.2014
- */
 public class ExceptionUtil {
     private ExceptionUtil() {
     }

@@ -18,7 +18,7 @@ import java.util.Collection;
 import static com.alev.restaurantrating.UserTestData.ADMIN;
 import static com.alev.restaurantrating.UserTestData.USER;
 
-@ContextConfiguration({"classpath:spring/spring-app.xml", "classpath:spring/mock.xml"})
+@ContextConfiguration({"classpath:spring/mock.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InMemoryAdminRestControllerSpringTest {
 
