@@ -24,7 +24,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         Restaurant restaurant = new Restaurant(null, "New restaurant");
         Restaurant created = service.save(restaurant);
         restaurant.setId(created.getId());
-        RESTAURANT_MATCHER.assertCollectionEquals(Arrays.asList(restaurant, TEST_RESTAURANT_3, TEST_RESTAURANT_2, TEST_RESTAURANT_1), service.getAll());
+        RESTAURANT_MATCHER.assertCollectionEquals(Arrays.asList(TEST_RESTAURANT_1, restaurant, TEST_RESTAURANT_2, TEST_RESTAURANT_3), service.getAll());
     }
 
     @Test(expected = DataAccessException.class)

@@ -18,17 +18,17 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_ADMIN', 100001),
   ('ROLE_USER', 100001);
 
-INSERT INTO restaurants ("id", "name") VALUES
-  (100002, 'Barbados');
-  INSERT INTO restaurants ("id", "name") VALUES
-  (100003, 'Ragnarok');
-INSERT INTO restaurants ("id", "name") VALUES
-  (100004, 'Saran');
+INSERT INTO restaurants ("name") VALUES
+  ('Barbados');
+  INSERT INTO restaurants ("name") VALUES
+  ('Ragnarok');
+INSERT INTO restaurants ("name") VALUES
+  ('Saran');
 
-INSERT INTO menus ("id", "restauran_id", "name", "menu_date") VALUES
-  (100005, 100002, 'Barbados menu', '2016-05-30'),
-  (100006, 100003, 'Ragnarok menu', '2016-05-30'),
-  (100007, 100004, 'Saran menu', '2016-05-31');
+INSERT INTO menus ("restauran_id", "name", "menu_date") VALUES
+  (100002, 'Barbados menu', '2016-05-30'),
+  (100003, 'Ragnarok menu', '2016-05-30'),
+  (100004, 'Saran menu', '2016-05-31');
 
 
 INSERT INTO dishes ("menu_id", "name", "price") VALUES
