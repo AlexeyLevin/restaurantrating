@@ -28,7 +28,7 @@ public interface ProxyRestaurantRepository extends JpaRepository<Restaurant, Int
     @Override
     List<Restaurant> findAll(Sort sort);
 
-    Restaurant findByName(final String name);
+    Restaurant findByName(String name);
 
 //    @Query("SELECT r FROM Restaurant r LEFT JOIN FETCH r.votes WHERE r.id = ?1")
 //    Restaurant getWithVotes(Integer id);

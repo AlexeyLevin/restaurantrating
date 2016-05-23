@@ -24,18 +24,18 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         Restaurant restaurant = new Restaurant(null, "New restaurant");
         Restaurant created = service.save(restaurant);
         restaurant.setId(created.getId());
-        RESTAURANT_MATCHER.assertCollectionEquals(Arrays.asList(restaurant, TEST_RESTAURANT_3, TEST_RESTAURANT_2, TEST_RESTAURANT_1), service.getAll());
+        RESTAURANT_MATCHER.assertCollectionEquals(Arrays.asList(RESTAURANT_1, restaurant, RESTAURANT_2, RESTAURANT_3), service.getAll());
     }
 
     @Test(expected = DataAccessException.class)
     public void testDuplicateMailSave() throws Exception {
-        service.save(new Restaurant(null, "Ragnarok"));
+        service.save(new Restaurant(null, RESTAURANT_1_NAME));
     }
 
     @Test
     public void testDelete() throws Exception {
-        service.delete(BARBADOS_ID);
-        RESTAURANT_MATCHER.assertCollectionEquals(Arrays.asList(TEST_RESTAURANT_2, TEST_RESTAURANT_3), service.getAll());
+        service.delete(RESTAURANT_1_ID);
+        RESTAURANT_MATCHER.assertCollectionEquals(Arrays.asList(RESTAURANT_2, RESTAURANT_3), service.getAll());
     }
 
     @Test(expected = NotFoundException.class)
@@ -45,8 +45,8 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGet() throws Exception {
-        Restaurant restaurant = service.get(BARBADOS_ID);
-        RESTAURANT_MATCHER.assertEquals(TEST_RESTAURANT_1, restaurant);
+        Restaurant restaurant = service.get(RESTAURANT_1_ID);
+        RESTAURANT_MATCHER.assertEquals(RESTAURANT_1, restaurant);
     }
 
     @Test(expected = NotFoundException.class)
@@ -56,21 +56,21 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGetByName() throws Exception {
-        Restaurant restaurant = service.getByName("Barbados");
-        RESTAURANT_MATCHER.assertEquals(TEST_RESTAURANT_1, restaurant);
+        Restaurant restaurant = service.getByName(RESTAURANT_1_NAME);
+        RESTAURANT_MATCHER.assertEquals(RESTAURANT_1, restaurant);
     }
 
     @Test
     public void testGetAll() throws Exception {
         Collection<Restaurant> all = service.getAll();
-        RESTAURANT_MATCHER.assertCollectionEquals(Arrays.asList(TEST_RESTAURANT_1, TEST_RESTAURANT_2, TEST_RESTAURANT_3), all);
+        RESTAURANT_MATCHER.assertCollectionEquals(Arrays.asList(RESTAURANT_1, RESTAURANT_2, RESTAURANT_3), all);
     }
 
     @Test
     public void testUpdate() throws Exception {
-        Restaurant updated = new Restaurant(TEST_RESTAURANT_1);
+        Restaurant updated = new Restaurant(RESTAURANT_1);
         updated.setName("UpdatedName");
         service.update(updated);
-        RESTAURANT_MATCHER.assertEquals(updated, service.get(BARBADOS_ID));
+        RESTAURANT_MATCHER.assertEquals(updated, service.get(RESTAURANT_1_ID));
     }
 }
