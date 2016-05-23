@@ -1,7 +1,6 @@
 package com.alev.restaurantrating.repository;
 
 import com.alev.restaurantrating.model.Restaurant;
-import com.alev.restaurantrating.model.User;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface RestaurantRepository {
 
     List<Restaurant> getAll();
 
-    default User getWithMenus(int id){
+    default Restaurant getWithMenus(int id){
         throw new UnsupportedOperationException();
     }
 }

@@ -1,41 +1,24 @@
 package com.alev.restaurantrating.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.time.LocalDate;
-import java.util.List;
 
+@Entity
+@Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"menu_date", "restaurant_id"}, name = "menu_date_idx")})
 public class LunchMenu extends NamedEntity {
 
-    private List<Dish> dishList;
-    private Restaurant restaurant;
+    @Column(name = "menu_date", nullable = false)
     private LocalDate menuDate;
+
+    public LunchMenu() {
+    }
 
     public LunchMenu(Integer id, String name, LocalDate menuDate) {
         super(id, name);
         this.menuDate = menuDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Dish> getDishList() {
-        return dishList;
-    }
-
-    public void setDishList(List<Dish> dishList) {
-        this.dishList = dishList;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
     }
 
     public LocalDate getMenuDate() {
@@ -50,8 +33,6 @@ public class LunchMenu extends NamedEntity {
     public String toString() {
         return "LunchMenu{" +
                 "name='" + name + '\'' +
-                ", dishList=" + dishList +
-                ", restaurant=" + restaurant +
                 '}';
     }
 }
