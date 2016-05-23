@@ -1,9 +1,6 @@
 package com.alev.restaurantrating.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -12,6 +9,10 @@ public class LunchMenu extends NamedEntity {
 
     @Column(name = "menu_date", nullable = false)
     private LocalDate menuDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private Restaurant restaurant;
 
     public LunchMenu() {
     }
@@ -29,10 +30,20 @@ public class LunchMenu extends NamedEntity {
         this.menuDate = menuDate;
     }
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
     @Override
     public String toString() {
         return "LunchMenu{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name=" + name +
+                ", menuDate=" + menuDate +
                 '}';
     }
 }

@@ -10,9 +10,9 @@ public interface RestaurantService {
 
     Restaurant save(Restaurant restaurant);
 
-    void delete(int id) throws NotFoundException;;
+    void delete(int id) throws NotFoundException;
 
-    Restaurant get(int id) throws NotFoundException;;
+    Restaurant get(int id) throws NotFoundException;
 
     Restaurant getByName(String name) throws NotFoundException;
 

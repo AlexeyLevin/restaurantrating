@@ -7,7 +7,7 @@ import com.alev.restaurantrating.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 
 @Service("menuService")
@@ -17,18 +17,18 @@ public class MenuServiceImpl implements MenuService {
     private MenuRepository repository;
 
     @Override
-    public LunchMenu save(LunchMenu lunchMenu) {
-        return repository.save(lunchMenu);
+    public LunchMenu get(int id, int restaurantId) throws NotFoundException {
+        return ExceptionUtil.check(repository.get(id, restaurantId), id);
     }
 
     @Override
-    public void delete(int id) throws NotFoundException {
-        ExceptionUtil.check(repository.delete(id), id);
+    public void delete(int id, int restaurantId) throws NotFoundException {
+        ExceptionUtil.check(repository.delete(id, restaurantId), id);
     }
 
     @Override
-    public LunchMenu get(int id) throws NotFoundException {
-        return ExceptionUtil.check(repository.get(id), id);
+    public LunchMenu save(LunchMenu lunchMenu, int restaurantId) {
+        return repository.save(lunchMenu, restaurantId);
     }
 
     @Override
@@ -38,12 +38,12 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public void update(LunchMenu lunchMenu) {
-        repository.save(lunchMenu);
+    public LunchMenu update(LunchMenu lunchMenu, int restaurantId) {
+        return ExceptionUtil.check(repository.save(lunchMenu, restaurantId), lunchMenu.getId());
     }
 
     @Override
-    public List<LunchMenu> getAll() {
-        return repository.getAll();
+    public Collection<LunchMenu> getAll(int restaurantId) {
+        return repository.getAll(restaurantId);
     }
 }

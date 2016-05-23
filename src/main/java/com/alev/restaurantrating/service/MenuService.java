@@ -3,19 +3,27 @@ package com.alev.restaurantrating.service;
 import com.alev.restaurantrating.model.LunchMenu;
 import com.alev.restaurantrating.util.exceptions.NotFoundException;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface MenuService {
 
-    LunchMenu save(LunchMenu lunchMenu);
+    LunchMenu get(int id, int restaurantId) throws NotFoundException;
 
-    void delete(int id) throws NotFoundException;;
+    void delete(int id, int restaurantId) throws NotFoundException;
 
-    LunchMenu get(int id) throws NotFoundException;;
+    Collection<LunchMenu> getAll(int restaurantId);
 
     LunchMenu getByName(String name) throws NotFoundException;
 
-    void update(LunchMenu lunchMenu);
+    LunchMenu update(LunchMenu lunchMenu, int restaurantId);
 
-    List<LunchMenu> getAll();
+    LunchMenu save(LunchMenu lunchMenu, int restaurantId);
+
+    default LunchMenu getWithRestaurant(int id, int restaurantId) throws NotFoundException {
+        throw new UnsupportedOperationException();
+    }
+
+    default LunchMenu getWithDishes(int id, int restaurantId) throws NotFoundException {
+        throw new UnsupportedOperationException();
+    }
 }

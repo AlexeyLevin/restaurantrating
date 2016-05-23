@@ -3,31 +3,41 @@ package com.alev.restaurantrating.repository.datajpa;
 import com.alev.restaurantrating.model.LunchMenu;
 import com.alev.restaurantrating.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Collection;
 
 @Repository
 public class DataJpaMenuRepositoryImpl implements MenuRepository {
-    private static final Sort SORT_NAME = new Sort("name");
 
     @Autowired
     private ProxyMenuRepository proxy;
 
+    @Autowired
+    private ProxyRestaurantRepository proxyRestaurantRepository;
+
     @Override
-    public LunchMenu save(LunchMenu lunchMenu) {
+    public LunchMenu save(LunchMenu lunchMenu, int restaurantId) {
+        if (!lunchMenu.isNew() && get(lunchMenu.getId(), restaurantId) == null) {
+            return null;
+        }
+        lunchMenu.setRestaurant(proxyRestaurantRepository.getOne(restaurantId));
         return proxy.save(lunchMenu);
     }
 
     @Override
-    public boolean delete(int id) {
-        return proxy.delete(id) != 0;
+    public boolean delete(int id, int restaurantId) {
+        return proxy.delete(id, restaurantId) != 0;
     }
 
     @Override
-    public LunchMenu get(int id) {
-        return proxy.findOne(id);
+    public LunchMenu get(int id, int restaurantId) {
+        return proxy.get(id, restaurantId);
+    }
+
+    @Override
+    public Collection<LunchMenu> getAll(int restaurantId) {
+        return proxy.getAll(restaurantId);
     }
 
     @Override
@@ -35,8 +45,9 @@ public class DataJpaMenuRepositoryImpl implements MenuRepository {
         return proxy.findByName(name);
     }
 
-    @Override
-    public List<LunchMenu> getAll() {
-        return proxy.findAll(SORT_NAME);
-    }
+//    @Override
+//    public LunchMenu get(int id) {
+//        return proxy.findOne(id);
+//    }
+//
 }
