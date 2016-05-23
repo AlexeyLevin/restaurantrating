@@ -7,7 +7,7 @@ import javax.persistence.UniqueConstraint;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"menu_date", "restaurant_id"}, name = "menu_date_idx")})
+@Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"menu_date"}, name = "menu_date_idx")})
 public class LunchMenu extends NamedEntity {
 
     @Column(name = "menu_date", nullable = false)
