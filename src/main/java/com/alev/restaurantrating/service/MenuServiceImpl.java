@@ -46,4 +46,14 @@ public class MenuServiceImpl implements MenuService {
     public Collection<LunchMenu> getAll(int restaurantId) {
         return repository.getAll(restaurantId);
     }
+
+    @Override
+    public LunchMenu getWithRestaurant(int id, int restaurantId) {
+        return repository.getWithRestaurant(id, restaurantId);
+    }
+
+    @Override
+    public LunchMenu getWithDishes(int id) {
+        return repository.getWithDishes(id);
+    }
 }

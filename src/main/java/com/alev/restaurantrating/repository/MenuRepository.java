@@ -21,11 +21,11 @@ public interface MenuRepository {
     //ORDERED date
     Collection<LunchMenu> getAll(int restaurantId);
 
-    default LunchMenu getWithDishes(int id, int restaurantId) {
-        throw new UnsupportedOperationException();
-    }
+    LunchMenu getWithRestaurant(int id, int restaurantId);
 
-    default LunchMenu getWithRestaurant(int id, int restaurantId) {
-        throw new UnsupportedOperationException();
-    }
+    LunchMenu getWithDishes(int id);
+
+//    default LunchMenu getWithDishes(int id, int restaurantId) {
+//        throw new UnsupportedOperationException();
+//    }
 }

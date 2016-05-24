@@ -6,7 +6,6 @@ import com.alev.restaurantrating.model.LunchMenu;
 import com.alev.restaurantrating.model.Restaurant;
 import com.alev.restaurantrating.model.Vote;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
@@ -30,30 +29,30 @@ public class ModelTestData {
     public static final LocalDate NEXT_VOTE_DAY = LocalDate.of(2016, Month.MAY, 31);
     public static final ModelMatcher<Restaurant, String> RESTAURANT_MATCHER = new ToStringModelMatcher<>(Restaurant.class);
     public static final ModelMatcher<LunchMenu, String> MENU_MATCHER = new ToStringModelMatcher<>(LunchMenu.class);
-
+    public static final ModelMatcher<Dish, String> DISH_MATCHER = new ToStringModelMatcher<>(Dish.class);
 
     private ModelTestData() {
     }
 
     public static final List<Dish> DISH_LIST_1 = Arrays.asList(
-            new Dish(RESTAURANT_1_NAME + " soup", new BigDecimal(2)),
-            new Dish(RESTAURANT_1_NAME + " salad", new BigDecimal(0.5)),
-            new Dish(RESTAURANT_1_NAME + " meat", new BigDecimal(2.5)),
-            new Dish(RESTAURANT_1_NAME + " coffee", new BigDecimal(0.2))
+            new Dish(100008, RESTAURANT_1_NAME + " soup", 2f),
+            new Dish(100009, RESTAURANT_1_NAME + " salad", 0.5f),
+            new Dish(100010, RESTAURANT_1_NAME + " meat", 2.5f),
+            new Dish(100011, RESTAURANT_1_NAME + " coffee", 0.2f)
     );
 
     public static final List<Dish> DISH_LIST_2 = Arrays.asList(
-            new Dish(RESTAURANT_2_NAME + " soup", new BigDecimal(1.5)),
-            new Dish(RESTAURANT_2_NAME + " salad", new BigDecimal(0.3)),
-            new Dish(RESTAURANT_2_NAME + " meat", new BigDecimal(2)),
-            new Dish(RESTAURANT_2_NAME + " coffee", new BigDecimal(0.1))
+            new Dish(100012, RESTAURANT_2_NAME + " soup", 1.5f),
+            new Dish(100013, RESTAURANT_2_NAME + " salad", 0.3f),
+            new Dish(100014, RESTAURANT_2_NAME + " meat", 2f),
+            new Dish(100015, RESTAURANT_2_NAME + " coffee", 0.1f)
     );
 
     public static final List<Dish> DISH_LIST_3 = Arrays.asList(
-            new Dish(RESTAURANT_3_NAME + " soup", new BigDecimal(1.5)),
-            new Dish(RESTAURANT_3_NAME + " salad", new BigDecimal(0.3)),
-            new Dish(RESTAURANT_3_NAME + " meat", new BigDecimal(2)),
-            new Dish(RESTAURANT_3_NAME + " coffee", new BigDecimal(0.1))
+            new Dish(100016, RESTAURANT_3_NAME + " soup", 1.5f),
+            new Dish(100017, RESTAURANT_3_NAME + " salad", 0.3f),
+            new Dish(100018, RESTAURANT_3_NAME + " meat", 2f),
+            new Dish(100019, RESTAURANT_3_NAME + " coffee", 0.1f)
     );
 
     public static final Restaurant RESTAURANT_1 = new Restaurant(RESTAURANT_1_ID, RESTAURANT_1_NAME);

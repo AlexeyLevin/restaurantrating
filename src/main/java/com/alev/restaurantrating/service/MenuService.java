@@ -26,4 +26,6 @@ public interface MenuService {
     default LunchMenu getWithDishes(int id, int restaurantId) throws NotFoundException {
         throw new UnsupportedOperationException();
     }
+
+    LunchMenu getWithDishes(int id);
 }
