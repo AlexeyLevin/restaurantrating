@@ -31,11 +31,10 @@ public interface ProxyMenuRepository extends JpaRepository<LunchMenu, Integer> {
     List<LunchMenu> getAll(@Param("restaurantId") int restaurantId);
 
     LunchMenu findByName(String name);
-   /*
-    @Query("SELECT m FROM LunchMenu m JOIN FETCH m.restaurant WHERE m.id = :id and um.restaurant.id = :restaurantId")
-    UserMeal getWithRestaurant(@Param("id") int id, @Param("restaurantId") int restaurantId);
 
-    @Query("SELECT m FROM Menus m LEFT JOIN FETCH m.dishes WHERE m.id = ?1")
-     Menu getWithDishes(Integer id);
-     */
+    @Query("SELECT m FROM LunchMenu m JOIN FETCH m.restaurant WHERE m.id = :id and m.restaurant.id = :restaurantId")
+    LunchMenu getWithRestaurant(@Param("id")int id,@Param("restaurantId") int restaurantId);
+
+    @Query("SELECT m FROM LunchMenu m LEFT JOIN FETCH m.dishes WHERE m.id=:id")
+    LunchMenu getWithDishes(@Param("id")int id);
 }

@@ -45,9 +45,19 @@ public class DataJpaMenuRepositoryImpl implements MenuRepository {
         return proxy.findByName(name);
     }
 
+    @Override
+    public LunchMenu getWithRestaurant(int id, int restaurantId) {
+        return proxy.getWithRestaurant(id, restaurantId);
+    }
+
+    @Override
+    public LunchMenu getWithDishes(int id) {
+        return proxy.getWithDishes(id);
+    }
+}
+
 //    @Override
 //    public LunchMenu get(int id) {
 //        return proxy.findOne(id);
 //    }
 //
-}

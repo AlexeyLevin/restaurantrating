@@ -2,9 +2,10 @@ package com.alev.restaurantrating.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Entity
-@Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"menu_date"}, name = "menu_date_idx")})
+@Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "menu_date"}, name = "menu_date_idx")})
 public class LunchMenu extends NamedEntity {
 
     @Column(name = "menu_date", nullable = false)
@@ -14,7 +15,15 @@ public class LunchMenu extends NamedEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "menu")
+    private Collection<Dish> dishes;
+
     public LunchMenu() {
+    }
+
+    public LunchMenu(String name, LocalDate menuDate) {
+        super(null, name);
+        this.menuDate = menuDate;
     }
 
     public LunchMenu(Integer id, String name, LocalDate menuDate) {
@@ -32,6 +41,14 @@ public class LunchMenu extends NamedEntity {
 
     public Restaurant getRestaurant() {
         return restaurant;
+    }
+
+    public Collection<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(Collection<Dish> dishes) {
+        this.dishes = dishes;
     }
 
     public void setRestaurant(Restaurant restaurant) {
