@@ -8,7 +8,7 @@ public class Dish extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", nullable = false)
-    private LunchMenu menu;
+    private Menu menu;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -46,11 +46,11 @@ public class Dish extends BaseEntity {
         this.price = price;
     }
 
-    public LunchMenu getMenu() {
+    public Menu getMenu() {
         return menu;
     }
 
-    public void setMenu(LunchMenu menu) {
+    public void setMenu(Menu menu) {
         this.menu = menu;
     }
 

@@ -6,7 +6,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "menu_date"}, name = "menu_date_idx")})
-public class LunchMenu extends NamedEntity {
+public class Menu extends NamedEntity {
 
     @Column(name = "menu_date", nullable = false)
     private LocalDate menuDate;
@@ -18,15 +18,15 @@ public class LunchMenu extends NamedEntity {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "menu")
     private Collection<Dish> dishes;
 
-    public LunchMenu() {
+    public Menu() {
     }
 
-    public LunchMenu(String name, LocalDate menuDate) {
+    public Menu(String name, LocalDate menuDate) {
         super(null, name);
         this.menuDate = menuDate;
     }
 
-    public LunchMenu(Integer id, String name, LocalDate menuDate) {
+    public Menu(Integer id, String name, LocalDate menuDate) {
         super(id, name);
         this.menuDate = menuDate;
     }
@@ -57,7 +57,7 @@ public class LunchMenu extends NamedEntity {
 
     @Override
     public String toString() {
-        return "LunchMenu{" +
+        return "Menu{" +
                 "id=" + id +
                 ", name=" + name +
                 ", menuDate=" + menuDate +

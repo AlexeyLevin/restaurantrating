@@ -32,7 +32,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant getByName(String name) throws NotFoundException {
+    public Restaurant findByName(String name) throws NotFoundException {
         Objects.requireNonNull(name, "Name must not be empty");
         return ExceptionUtil.check(repository.findByName(name), "name=" + name);
     }

@@ -20,7 +20,7 @@ INSERT INTO user_roles (role, user_id) VALUES
 
 INSERT INTO restaurants (name) VALUES
   ('Barbados');
-  INSERT INTO restaurants (name) VALUES
+INSERT INTO restaurants (name) VALUES
   ('Ragnarok');
 INSERT INTO restaurants (name) VALUES
   ('Saran');

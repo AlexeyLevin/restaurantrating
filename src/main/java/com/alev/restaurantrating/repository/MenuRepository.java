@@ -1,31 +1,31 @@
 package com.alev.restaurantrating.repository;
 
-import com.alev.restaurantrating.model.LunchMenu;
+import com.alev.restaurantrating.model.Menu;
 
 import java.util.Collection;
 
 public interface MenuRepository {
 
-    // null if updated lunchMenu do not belong to restaurantId
-    LunchMenu save(LunchMenu lunchMenu, int restaurantId);
+    // null if updated menu do not belong to restaurantId
+    Menu save(Menu menu, int restaurantId);
 
     // false if menu do not belong to restaurantId
     boolean delete(int id, int restaurantId);
 
     // null if menu do not belong to restaurantId
-    LunchMenu get(int id, int restaurantId);
+    Menu get(int id, int restaurantId);
 
     // null if not found
-    LunchMenu findByName(String name);
+    Menu findByName(String name);
 
     //ORDERED date
-    Collection<LunchMenu> getAll(int restaurantId);
+    Collection<Menu> getAll(int restaurantId);
 
-    LunchMenu getWithRestaurant(int id, int restaurantId);
+    Menu getWithRestaurant(int id, int restaurantId);
 
-    LunchMenu getWithDishes(int id);
+    Menu getWithDishes(int id);
 
-//    default LunchMenu getWithDishes(int id, int restaurantId) {
+//    default Menu getWithDishes(int id, int restaurantId) {
 //        throw new UnsupportedOperationException();
 //    }
 }
