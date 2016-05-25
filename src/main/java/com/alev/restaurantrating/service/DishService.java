@@ -18,7 +18,5 @@ public interface DishService {
 
     Dish save(Dish dish, int menuId);
 
-    default Dish getWithMenu(int id, int menuId) throws NotFoundException {
-        throw new UnsupportedOperationException();
-    }
+    Dish getWithMenu(int id, int menuId);
 }

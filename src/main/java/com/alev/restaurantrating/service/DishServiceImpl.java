@@ -46,4 +46,9 @@ public class DishServiceImpl implements DishService {
     public Collection<Dish> getAll(int menuId) {
         return repository.getAll(menuId);
     }
+
+    @Override
+    public Dish getWithMenu(int id, int menuId) throws NotFoundException {
+        return repository.getWithMenu(id, menuId);
+    }
 }

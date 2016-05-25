@@ -26,7 +26,8 @@ public interface ProxyDishRepository extends JpaRepository<Dish, Integer> {
     @Transactional
     Dish save(Dish dish);
 
-    @Query("SELECT m FROM Dish m JOIN FETCH m.menu WHERE m.id = :id and m.menu.id = :menuId")
+//@Query("SELECT m FROM Menu m JOIN FETCH m.restaurant WHERE m.id = :id and m.restaurant.id = :restaurantId")
+    @Query("SELECT d FROM Dish d JOIN FETCH d.menu WHERE d.id = :id and d.menu.id = :menuId")
     Dish getWithMenu(@Param("id") int id, @Param("menuId") int menuId);
 
     @Override

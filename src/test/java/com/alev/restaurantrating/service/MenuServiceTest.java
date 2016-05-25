@@ -41,20 +41,20 @@ public class MenuServiceTest extends AbstractServiceTest {
 
     @Test
     public void testFindByName() {
-        Menu actual = service.findByName("Ragnarok menu");
+        Menu actual = service.findByName(RESTAURANT_2_NAME + STRING_MENU);
         MENU_MATCHER.assertEquals(RESTAURANT_2_MENU, actual);
     }
 
     @Test
     public void testUpdate() {
-        Menu updated = new Menu(RESTAURANT_1_MENU_ID, RESTAURANT_1_NAME + " обновленный", LocalDate.now());
+        Menu updated = new Menu(RESTAURANT_1_MENU_ID, RESTAURANT_1_NAME + " new", LocalDate.now());
         service.update(updated, RESTAURANT_1_ID);
         MENU_MATCHER.assertEquals(updated, service.get(RESTAURANT_1_MENU_ID, RESTAURANT_1_ID));
     }
 
     @Test
     public void testGetAll() {
-        Menu menu = new Menu(RESTAURANT_1_NAME + " обновленный", LocalDate.now());
+        Menu menu = new Menu(RESTAURANT_1_NAME + " new", LocalDate.now());
         service.save(menu, RESTAURANT_1_ID);
         MENU_MATCHER.assertCollectionEquals(Arrays.asList(RESTAURANT_1_MENU, menu), service.getAll(RESTAURANT_1_ID));
     }

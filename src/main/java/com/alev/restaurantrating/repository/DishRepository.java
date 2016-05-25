@@ -20,7 +20,5 @@ public interface DishRepository {
     //ORDERED date
     Collection<Dish> getAll(int menuId);
 
-    default Dish getWithMenu(int id, int menuId) {
-        throw new UnsupportedOperationException();
-    }
+    Dish getWithMenu(int id, int menuId);
 }
