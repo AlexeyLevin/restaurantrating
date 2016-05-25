@@ -1,6 +1,6 @@
 package com.alev.restaurantrating.service;
 
-import com.alev.restaurantrating.model.LunchMenu;
+import com.alev.restaurantrating.model.Menu;
 import com.alev.restaurantrating.repository.MenuRepository;
 import com.alev.restaurantrating.util.exceptions.ExceptionUtil;
 import com.alev.restaurantrating.util.exceptions.NotFoundException;
@@ -17,7 +17,7 @@ public class MenuServiceImpl implements MenuService {
     private MenuRepository repository;
 
     @Override
-    public LunchMenu get(int id, int restaurantId) throws NotFoundException {
+    public Menu get(int id, int restaurantId) throws NotFoundException {
         return ExceptionUtil.check(repository.get(id, restaurantId), id);
     }
 
@@ -27,33 +27,33 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public LunchMenu save(LunchMenu lunchMenu, int restaurantId) {
-        return repository.save(lunchMenu, restaurantId);
+    public Menu save(Menu menu, int restaurantId) {
+        return repository.save(menu, restaurantId);
     }
 
     @Override
-    public LunchMenu getByName(String name) throws NotFoundException {
+    public Menu findByName(String name) throws NotFoundException {
         Objects.requireNonNull(name, "Name must not be empty");
         return ExceptionUtil.check(repository.findByName(name), "name=" + name);
     }
 
     @Override
-    public LunchMenu update(LunchMenu lunchMenu, int restaurantId) {
-        return ExceptionUtil.check(repository.save(lunchMenu, restaurantId), lunchMenu.getId());
+    public Menu update(Menu menu, int restaurantId) {
+        return ExceptionUtil.check(repository.save(menu, restaurantId), menu.getId());
     }
 
     @Override
-    public Collection<LunchMenu> getAll(int restaurantId) {
+    public Collection<Menu> getAll(int restaurantId) {
         return repository.getAll(restaurantId);
     }
 
     @Override
-    public LunchMenu getWithRestaurant(int id, int restaurantId) {
+    public Menu getWithRestaurant(int id, int restaurantId) {
         return repository.getWithRestaurant(id, restaurantId);
     }
 
     @Override
-    public LunchMenu getWithDishes(int id) {
+    public Menu getWithDishes(int id) {
         return repository.getWithDishes(id);
     }
 }

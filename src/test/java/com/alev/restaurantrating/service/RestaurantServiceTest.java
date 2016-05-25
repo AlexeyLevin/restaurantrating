@@ -55,8 +55,8 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testGetByName() throws Exception {
-        Restaurant restaurant = service.getByName(RESTAURANT_1_NAME);
+    public void testFindByName() throws Exception {
+        Restaurant restaurant = service.findByName(RESTAURANT_1_NAME);
         RESTAURANT_MATCHER.assertEquals(RESTAURANT_1, restaurant);
     }
 

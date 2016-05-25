@@ -10,11 +10,11 @@ public class Restaurant extends NamedEntity {
 
     public Restaurant() {
     }
-    //private LunchMenu lunchMenu;
+    //private Menu menu;
 
     public Restaurant(Restaurant r) {
         super(r.getId(), r.getName());
-    //    this.lunchMenu = r.getLunchMenu();
+    //    this.menu = r.getMenu();
     }
 
     public Restaurant(Integer id, String name) {
@@ -22,20 +22,19 @@ public class Restaurant extends NamedEntity {
     }
 
 
-
-//    public LunchMenu getLunchMenu() {
-//        return lunchMenu;
+//    public Menu getMenu() {
+//        return menu;
 //    }
 //
-//    public void setLunchMenu(LunchMenu lunchMenu) {
-//        this.lunchMenu = lunchMenu;
+//    public void setLunchMenu(Menu menu) {
+//        this.menu = menu;
 //    }
     @Override
     public String toString() {
         return "Restaurant{" +
                 "id=" + id +
                 ", name=" + name +
-//                ", lunchMenu=" + lunchMenu +
+//                ", menu=" + menu +
                 '}';
     }
 }

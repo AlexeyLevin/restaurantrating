@@ -8,14 +8,14 @@ public class Vote extends BaseEntity {
 
     private Restaurant restaurant;
 
-    private LunchMenu lunchMenu;
+    private Menu menu;
 
     private User user;
 
-    public Vote(LocalDate voteDateTime, Restaurant restaurant, LunchMenu lunchMenu) {
+    public Vote(LocalDate voteDateTime, Restaurant restaurant, Menu menu) {
         this.voteDateTime = voteDateTime;
         this.restaurant = restaurant;
-        this.lunchMenu = lunchMenu;
+        this.menu = menu;
     }
 
     public LocalDate getVoteDateTime() {
@@ -34,12 +34,12 @@ public class Vote extends BaseEntity {
         this.restaurant = restaurant;
     }
 
-    public LunchMenu getLunchMenu() {
-        return lunchMenu;
+    public Menu getMenu() {
+        return menu;
     }
 
-    public void setLunchMenu(LunchMenu lunchMenu) {
-        this.lunchMenu = lunchMenu;
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
 
@@ -56,7 +56,7 @@ public class Vote extends BaseEntity {
         return "Vote{" +
                 "voteDateTime=" + voteDateTime +
                 ", restaurant=" + restaurant +
-                ", lunchMenu=" + lunchMenu +
+                ", menu=" + menu +
                 '}';
     }
 }

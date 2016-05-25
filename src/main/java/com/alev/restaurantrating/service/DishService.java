@@ -12,13 +12,11 @@ public interface DishService {
 
     Collection<Dish> getAll(int menuId);
 
-    Dish getByName(String name) throws NotFoundException;
+    Dish findByName(String name) throws NotFoundException;
 
     Dish update(Dish dish, int menuId);
 
     Dish save(Dish dish, int menuId);
 
-    default Dish getWithMenu(int id, int menuId) throws NotFoundException {
-        throw new UnsupportedOperationException();
-    }
+    Dish getWithMenu(int id, int menuId);
 }
