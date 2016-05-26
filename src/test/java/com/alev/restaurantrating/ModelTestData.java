@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.alev.restaurantrating.TestUtil.ToStringModelMatcher;
+import static com.alev.restaurantrating.UserTestData.ADMIN;
+import static com.alev.restaurantrating.UserTestData.USER;
 import static com.alev.restaurantrating.model.BaseEntity.START_SEQ;
 
 public class ModelTestData {
@@ -48,8 +50,8 @@ public class ModelTestData {
     public static final String STRING_MEAT = " meat";
     public static final String STRING_COFFEE = " coffee";
 
-    public static final LocalDate VOTE_DAY = LocalDate.of(2016, Month.MAY, 30);
-    public static final LocalDate NEXT_VOTE_DAY = LocalDate.of(2016, Month.MAY, 31);
+    public static final LocalDate VOTE_DAY = LocalDate.of(2015, Month.MAY, 30);
+    public static final LocalDate NEXT_VOTE_DAY = LocalDate.of(2015, Month.MAY, 31);
 
     public static final Restaurant RESTAURANT_1 = new Restaurant(RESTAURANT_1_ID, RESTAURANT_1_NAME);
     public static final Restaurant RESTAURANT_2 = new Restaurant(RESTAURANT_2_ID, RESTAURANT_2_NAME);
@@ -74,6 +76,11 @@ public class ModelTestData {
     public static final Dish DISH_3_MENU_3 = new Dish(DISH_3_MENU_3_ID, RESTAURANT_3_NAME + STRING_MEAT, 2f);
     public static final Dish DISH_4_MENU_3 = new Dish(DISH_4_MENU_3_ID, RESTAURANT_3_NAME + STRING_COFFEE, 0.1f);
 
+    public static final Vote USER_VOTE_1 = new Vote(USER_VOTE_1_ID, USER, VOTE_DAY, RESTAURANT_1, RESTAURANT_1_MENU);
+    public static final Vote USER_VOTE_2 = new Vote(USER_VOTE_2_ID, USER, NEXT_VOTE_DAY, RESTAURANT_2, RESTAURANT_2_MENU);
+    public static final Vote ADMIN_VOTE_1 = new Vote(ADMIN_VOTE_1_ID, ADMIN, VOTE_DAY, RESTAURANT_2, RESTAURANT_2_MENU);
+    public static final Vote ADMIN_VOTE_2 = new Vote(ADMIN_VOTE_2_ID, ADMIN, NEXT_VOTE_DAY, RESTAURANT_3, RESTAURANT_3_MENU);
+
     public static final ModelMatcher<Restaurant, String> RESTAURANT_MATCHER = new ToStringModelMatcher<>(Restaurant.class);
     public static final ModelMatcher<Menu, String> MENU_MATCHER = new ToStringModelMatcher<>(Menu.class);
     public static final ModelMatcher<Dish, String> DISH_MATCHER = new ToStringModelMatcher<>(Dish.class);
@@ -83,15 +90,8 @@ public class ModelTestData {
     public static final List<Dish> DISH_LIST_2 = new ArrayList<>(Arrays.asList(DISH_1_MENU_2, DISH_2_MENU_2, DISH_3_MENU_2, DISH_4_MENU_2));
     public static final List<Dish> DISH_LIST_3 = new ArrayList<>(Arrays.asList(DISH_1_MENU_3, DISH_2_MENU_3, DISH_3_MENU_3, DISH_4_MENU_3));
 
-    public static final List<Vote> USER_VOTE_LIST = Arrays.asList(
-            new Vote(VOTE_DAY, RESTAURANT_1, RESTAURANT_1_MENU),
-            new Vote(NEXT_VOTE_DAY, RESTAURANT_3, RESTAURANT_3_MENU)
-    );
-
-    public static final List<Vote> ADMIN_VOTE_LIST = Arrays.asList(
-            new Vote(VOTE_DAY, RESTAURANT_2, RESTAURANT_2_MENU),
-            new Vote(NEXT_VOTE_DAY, RESTAURANT_3, RESTAURANT_3_MENU)
-    );
+    public static final List<Vote> USER_VOTE_LIST = Arrays.asList(USER_VOTE_1, USER_VOTE_2);
+    public static final List<Vote> ADMIN_VOTE_LIST = Arrays.asList(ADMIN_VOTE_1, ADMIN_VOTE_2);
 
     private ModelTestData() {
     }

@@ -26,7 +26,7 @@ public class Restaurant extends NamedEntity {
 //        return menu;
 //    }
 //
-//    public void setLunchMenu(Menu menu) {
+//    public void setMenu(Menu menu) {
 //        this.menu = menu;
 //    }
     @Override

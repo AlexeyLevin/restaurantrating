@@ -24,7 +24,7 @@ public class MenuServiceTest extends AbstractServiceTest {
         Menu menu = new Menu("New menu", LocalDate.now());
         Menu created = service.save(menu, RESTAURANT_1_ID);
         menu.setId(created.getId());
-        MENU_MATCHER.assertCollectionEquals(Arrays.asList(RESTAURANT_1_MENU, created), service.getAll(RESTAURANT_1_ID));
+        MENU_MATCHER.assertCollectionEquals(Arrays.asList(created, RESTAURANT_1_MENU), service.getAll(RESTAURANT_1_ID));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class MenuServiceTest extends AbstractServiceTest {
     public void testGetAll() {
         Menu menu = new Menu(RESTAURANT_1_NAME + " new", LocalDate.now());
         service.save(menu, RESTAURANT_1_ID);
-        MENU_MATCHER.assertCollectionEquals(Arrays.asList(RESTAURANT_1_MENU, menu), service.getAll(RESTAURANT_1_ID));
+        MENU_MATCHER.assertCollectionEquals(Arrays.asList(menu, RESTAURANT_1_MENU), service.getAll(RESTAURANT_1_ID));
     }
 
     @Test

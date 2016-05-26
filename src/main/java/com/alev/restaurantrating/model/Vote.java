@@ -1,29 +1,52 @@
 package com.alev.restaurantrating.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "vote_date", "restaurant_id", "menu_id"}, name = "user_date_restaurant_menu_unique_idx")})
 public class Vote extends BaseEntity {
 
-    private LocalDate voteDateTime;
-
-    private Restaurant restaurant;
-
-    private Menu menu;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public Vote(LocalDate voteDateTime, Restaurant restaurant, Menu menu) {
-        this.voteDateTime = voteDateTime;
+    @Column(name = "vote_date", nullable = false)
+    private LocalDate voteDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private Restaurant restaurant;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id", nullable = false)
+    private Menu menu;
+
+    public Vote() {
+    }
+
+    public Vote(Integer id, User user, LocalDate voteDate, Restaurant restaurant, Menu menu) {
+        super(id);
+        this.user = user;
+        this.voteDate = voteDate;
         this.restaurant = restaurant;
         this.menu = menu;
     }
 
-    public LocalDate getVoteDateTime() {
-        return voteDateTime;
+    public Vote(Vote vote) {
+        super(vote.getId());
+        this.user = vote.getUser();
+        this.voteDate =  vote.getVoteDate();
+        this.restaurant = vote.getRestaurant();
+        this.menu = vote.getMenu();
     }
 
-    public void setVoteDateTime(LocalDate voteDateTime) {
-        this.voteDateTime = voteDateTime;
+    public LocalDate getVoteDate() {
+        return voteDate;
+    }
+
+    public void setVoteDate(LocalDate voteDateTime) {
+        this.voteDate = voteDateTime;
     }
 
     public Restaurant getRestaurant() {
@@ -54,9 +77,8 @@ public class Vote extends BaseEntity {
     @Override
     public String toString() {
         return "Vote{" +
-                "voteDateTime=" + voteDateTime +
-                ", restaurant=" + restaurant +
-                ", menu=" + menu +
+                "id=" + id +
+                ", voteDate=" + voteDate +
                 '}';
     }
 }

@@ -90,7 +90,6 @@ public class UserServiceImpl implements UserService { // , UserDetailsService
 
 //    @Override
 //    public User getWithVotes(int id) {
-//        return null;
-////        return ExceptionUtil.check(repository.getWithVotes(id), id);
+//        return ExceptionUtil.check(repository.getWithVotes(id), id);
 //    }
 }

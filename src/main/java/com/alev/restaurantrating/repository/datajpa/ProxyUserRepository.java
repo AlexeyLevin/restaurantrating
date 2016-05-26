@@ -15,7 +15,6 @@ public interface ProxyUserRepository extends JpaRepository<User, Integer> {
 
     @Transactional
     @Modifying
-//    @Query(name = User.DELETE)
     @Query("DELETE FROM User u WHERE u.id=:id")
     int delete(@Param("id") int id);
 
@@ -31,6 +30,6 @@ public interface ProxyUserRepository extends JpaRepository<User, Integer> {
 
     User getByEmail(String email);
 
-//    @Query("SELECT u FROM User u LEFT JOIN FETCH u.meals WHERE u.id = ?1")
-//    User getWithMeals(Integer id);
+//    @Query("SELECT u FROM User u LEFT JOIN FETCH u.votes WHERE u.id = ?1")
+//    User getWithVotes(Integer id);
 }

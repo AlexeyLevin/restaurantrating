@@ -35,7 +35,7 @@ public class UserServiceTest extends AbstractServiceTest {
         TestUser tu = new TestUser(null, "New", "new@gmail.com", "newPass", false, Collections.singleton(Role.ROLE_USER));
         User created = service.save(tu.asUser());
         tu.setId(created.getId());
-        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, tu, USER), service.getAll());
+        USER_MATHCER.assertCollectionEquals(Arrays.asList(ADMIN, tu, USER), service.getAll());
     }
 
     @Test(expected = DataAccessException.class)
@@ -46,7 +46,7 @@ public class UserServiceTest extends AbstractServiceTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(USER_ID);
-        MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), service.getAll());
+        USER_MATHCER.assertCollectionEquals(Collections.singletonList(ADMIN), service.getAll());
     }
 
     @Test(expected = NotFoundException.class)
@@ -57,7 +57,7 @@ public class UserServiceTest extends AbstractServiceTest {
     @Test
     public void testGet() throws Exception {
         User user = service.get(USER_ID);
-        MATCHER.assertEquals(USER, user);
+        USER_MATHCER.assertEquals(USER, user);
     }
 
     @Test(expected = NotFoundException.class)
@@ -68,13 +68,13 @@ public class UserServiceTest extends AbstractServiceTest {
     @Test
     public void testGetByEmail() throws Exception {
         User user = service.getByEmail("user@yandex.ru");
-        MATCHER.assertEquals(USER, user);
+        USER_MATHCER.assertEquals(USER, user);
     }
 
     @Test
     public void testGetAll() throws Exception {
         Collection<User> all = service.getAll();
-        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, USER), all);
+        USER_MATHCER.assertCollectionEquals(Arrays.asList(ADMIN, USER), all);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class UserServiceTest extends AbstractServiceTest {
         updated.setName("UpdatedName");
         updated.setRoles(Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_USER));
         service.update(updated.asUser());
-        MATCHER.assertEquals(updated, service.get(USER_ID));
+        USER_MATHCER.assertEquals(updated, service.get(USER_ID));
     }
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -93,8 +93,8 @@ public class UserServiceTest extends AbstractServiceTest {
 //    @Test
 //    public void testGetWithMeals() throws Exception {
 //        User user = service.getWithVotes(USER_ID);
-//        MATCHER.assertEquals(USER, user);
-//        ModelTestData.MATCHER.assertCollectionEquals(MealTestData.USER_VOTES, user.getVotes());
+//        USER_MATHCER.assertEquals(USER, user);
+//        ModelTestData.USER_MATHCER.assertCollectionEquals(MealTestData.USER_VOTES, user.getVotes());
 //    }
 
     @Test(expected = UnsupportedOperationException.class)
