@@ -40,8 +40,7 @@ public class User extends NamedEntity {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<Role> roles;
 
-//    protected Vote todayVote;
-//    protected List<Vote> votes;
+//  protected List<Vote> votes;
 
     public User() {
     }

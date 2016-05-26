@@ -26,9 +26,9 @@ INSERT INTO restaurants (name) VALUES
   ('Saran');
 
 INSERT INTO menus (restaurant_id, name, menu_date) VALUES
-  (100002, 'Barbados menu', '2016-05-30'),
-  (100003, 'Ragnarok menu', '2016-05-30'),
-  (100004, 'Saran menu', '2016-05-31');
+  (100002, 'Barbados menu', '2015-05-30'),
+  (100003, 'Ragnarok menu', '2015-05-30'),
+  (100004, 'Saran menu', '2015-05-31');
 
 
 INSERT INTO dishes (menu_id, name, price) VALUES
@@ -48,11 +48,11 @@ INSERT INTO dishes (menu_id, name, price) VALUES
   (100007, 'Saran coffee', 0.1);
 
 INSERT INTO votes (user_id, vote_date, restaurant_id, menu_id) VALUES
-  (100000, '2016-05-30', 100002, 100005),
-  (100000, '2016-05-31', 100004, 100007),
+  (100000, '2015-05-30', 100002, 100005),
+  (100000, '2015-05-31', 100004, 100007),
 
-  (100001, '2016-05-30', 100003, 100006),
-  (100001, '2016-05-31', 100004, 100007);
+  (100001, '2015-05-30', 100003, 100006),
+  (100001, '2015-05-31', 100004, 100007);
 
 
 
