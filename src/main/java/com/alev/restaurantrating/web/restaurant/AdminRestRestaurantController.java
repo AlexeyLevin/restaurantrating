@@ -10,8 +10,8 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(RestRestaurantController.REST_URL)
-public class RestRestaurantController extends AbstractRestaurantController {
+@RequestMapping(AdminRestRestaurantController.REST_URL)
+public class AdminRestRestaurantController extends AbstractRestaurantController {
 
     public static final String REST_URL = "/rest/admin/restaurants";
 
