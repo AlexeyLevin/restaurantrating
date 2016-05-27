@@ -5,7 +5,7 @@ import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.to.UserTo;
 import com.alev.restaurantrating.util.UserUtil;
 import com.alev.restaurantrating.web.AbstractControllerTest;
-import com.alev.restaurantrating.web.json.JsonUtil;
+import com.alev.restaurantrating.util.json.JsonUtil;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 

@@ -1,4 +1,4 @@
-package com.alev.restaurantrating.web.json;
+package com.alev.restaurantrating.util.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectReader;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import java.io.IOException;
 import java.util.List;
 
-import static com.alev.restaurantrating.web.json.JacksonObjectMapper.getMapper;
+import static com.alev.restaurantrating.util.json.JacksonObjectMapper.getMapper;
 
 public class JsonUtil {
 

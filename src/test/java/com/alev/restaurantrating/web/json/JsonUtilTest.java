@@ -2,6 +2,7 @@ package com.alev.restaurantrating.web.json;
 
 import com.alev.restaurantrating.UserTestData;
 import com.alev.restaurantrating.model.User;
+import com.alev.restaurantrating.util.json.JsonUtil;
 import org.junit.Test;
 
 /**
