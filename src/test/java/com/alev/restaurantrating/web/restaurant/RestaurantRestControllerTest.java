@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class RestaurantRestControllerTest extends AbstractControllerTest {
 
-    public static final String REST_URL = RestRestaurantController.REST_URL + '/';
+    public static final String REST_URL = AdminRestRestaurantController.REST_URL + '/';
 
     @Autowired
     private RestaurantService service;
