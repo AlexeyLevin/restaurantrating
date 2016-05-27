@@ -64,7 +64,7 @@ public class VoteServiceTest extends AbstractServiceTest {
     @Test
     public void testGetWithFields() {
         Vote vote = service.getWithFields(USER_VOTE_1_ID, USER_ID);
-        UserTestData.USER_MATHCER.assertEquals(USER, vote.getUser());
+        UserTestData.USER_MATCHER.assertEquals(USER, vote.getUser());
         Assert.assertEquals(VOTE_DAY, vote.getVoteDate());
         MENU_MATCHER.assertEquals(RESTAURANT_1_MENU, vote.getMenu());
         RESTAURANT_MATCHER.assertEquals(RESTAURANT_1, vote.getRestaurant());
