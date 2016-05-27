@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
 import com.alev.restaurantrating.TestUtil;
-import com.alev.restaurantrating.web.json.JsonUtil;
+import com.alev.restaurantrating.util.json.JsonUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;

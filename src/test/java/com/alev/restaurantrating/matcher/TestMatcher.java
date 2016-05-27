@@ -2,7 +2,7 @@ package com.alev.restaurantrating.matcher;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import com.alev.restaurantrating.web.json.JsonUtil;
+import com.alev.restaurantrating.util.json.JsonUtil;
 
 abstract public class TestMatcher<T> extends BaseMatcher<String> {
     protected T expected;

@@ -1,4 +1,4 @@
-package com.alev.restaurantrating.web.json;
+package com.alev.restaurantrating.util.json;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
