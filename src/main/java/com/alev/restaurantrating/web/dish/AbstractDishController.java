@@ -19,6 +19,11 @@ public class AbstractDishController {
         return dishService.get(id, menuId);
     }
 
+    public Dish getWithMenu(int id, int menuId)  {
+        LOG.info("getWithMenu {} for Menu {}", id, menuId);
+        return dishService.getWithMenu(id, menuId);
+    }
+
     public void delete(int id, int menuId) {
         LOG.info("delete dish {} for Menu {}", id, menuId);
         dishService.delete(id, menuId);
