@@ -5,7 +5,7 @@ import com.alev.restaurantrating.model.BaseEntity;
 public class LoggedUser {
     public static int id = BaseEntity.START_SEQ;
 
-    public static int id() {
+    public static int getId() {
         return id;
     }
 

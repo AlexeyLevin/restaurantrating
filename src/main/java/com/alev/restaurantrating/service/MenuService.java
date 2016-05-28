@@ -19,13 +19,11 @@ public interface MenuService {
 
     Menu save(Menu menu, int restaurantId);
 
-    default Menu getWithRestaurant(int id, int restaurantId) throws NotFoundException {
-        throw new UnsupportedOperationException();
-    }
+    Menu getWithRestaurant(int id, int restaurantId);
+
+    Menu getWithDishes(int id);
 
     default Menu getWithDishes(int id, int restaurantId) throws NotFoundException {
         throw new UnsupportedOperationException();
     }
-
-    Menu getWithDishes(int id);
 }

@@ -87,7 +87,7 @@ public class ModelTestData {
     public static final ModelMatcher<Vote, String> VOTE_MATCHER = new ToStringModelMatcher<>(Vote.class);
 
     public static final List<Dish> DISH_LIST_1 = new ArrayList<>(Arrays.asList(DISH_1_MENU_1, DISH_2_MENU_1, DISH_3_MENU_1, DISH_4_MENU_1));
-    public static final List<Dish> DISH_LIST_2 = new ArrayList<>(Arrays.asList(DISH_1_MENU_2, DISH_2_MENU_2, DISH_3_MENU_2, DISH_4_MENU_2));
+    public static final List<Dish> DISH_LIST_2 = new ArrayList<>(Arrays.asList(DISH_4_MENU_2, DISH_3_MENU_2, DISH_2_MENU_2, DISH_1_MENU_2));
     public static final List<Dish> DISH_LIST_3 = new ArrayList<>(Arrays.asList(DISH_1_MENU_3, DISH_2_MENU_3, DISH_3_MENU_3, DISH_4_MENU_3));
 
     public static final List<Vote> USER_VOTE_LIST = Arrays.asList(USER_VOTE_1, USER_VOTE_2);

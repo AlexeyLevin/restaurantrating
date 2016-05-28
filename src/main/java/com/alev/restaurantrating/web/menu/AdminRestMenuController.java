@@ -13,10 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping(AdminRestMenuController.REST_URL)
 public class AdminRestMenuController extends AbstractMenuController {
-    public static final String REST_URL = "/rest/admin/{restaurantId}/menus";
+    public static final String REST_URL = "/rest/admin/restaurants/{restaurantId}/menus";
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Menu get(@PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
+    public Menu get(@PathVariable("id") int id, @PathVariable int restaurantId) {
         return super.get(id, restaurantId);
     }
 
@@ -25,7 +25,7 @@ public class AdminRestMenuController extends AbstractMenuController {
         super.delete(id, restaurantId);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Menu> getAll(@PathVariable int restaurantId) {
         return new ArrayList<>(super.getAll(restaurantId));
     }
@@ -41,7 +41,7 @@ public class AdminRestMenuController extends AbstractMenuController {
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
-                .buildAndExpand(created.getId()).toUri();
+                .buildAndExpand(restaurantId, created.getId()).toUri();
 
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
