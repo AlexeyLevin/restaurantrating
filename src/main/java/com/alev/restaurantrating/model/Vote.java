@@ -1,5 +1,7 @@
 package com.alev.restaurantrating.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -7,6 +9,7 @@ import java.time.LocalDate;
 @Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "vote_date", "restaurant_id", "menu_id"}, name = "user_date_restaurant_menu_unique_idx")})
 public class Vote extends BaseEntity {
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -14,10 +17,12 @@ public class Vote extends BaseEntity {
     @Column(name = "vote_date", nullable = false)
     private LocalDate voteDate;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", nullable = false)
     private Menu menu;
@@ -64,7 +69,6 @@ public class Vote extends BaseEntity {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
-
 
     public User getUser() {
         return user;

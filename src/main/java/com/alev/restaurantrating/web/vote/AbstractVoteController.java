@@ -2,6 +2,7 @@ package com.alev.restaurantrating.web.vote;
 
 import com.alev.restaurantrating.model.Vote;
 import com.alev.restaurantrating.service.VoteService;
+import com.alev.restaurantrating.to.VoteTo;
 import com.alev.restaurantrating.web.LoggedUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +22,10 @@ public class AbstractVoteController {
         return voteService.get(id, userId);
     }
 
-    public Vote getWithFields(int id) {
+    public VoteTo getWithFields(int id) {
         int userId = LoggedUser.getId();
         LOG.info("getWithFields vote {} for User {}", id, userId);
-        return voteService.getWithFields(id, userId);
+        return new VoteTo(voteService.getWithFields(id, userId));
     }
 
     public void delete(int id) {

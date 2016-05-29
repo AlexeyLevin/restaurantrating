@@ -1,5 +1,7 @@
 package com.alev.restaurantrating.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -11,12 +13,18 @@ public class Menu extends NamedEntity {
     @Column(name = "menu_date", nullable = false)
     private LocalDate menuDate;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "menu")
     private Collection<Dish> dishes;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "menu")
+    private Collection<Vote> votes;
 
     public Menu() {
     }
@@ -53,6 +61,14 @@ public class Menu extends NamedEntity {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public Collection<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Collection<Vote> votes) {
+        this.votes = votes;
     }
 
     @Override

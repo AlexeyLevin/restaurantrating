@@ -1,8 +1,9 @@
 package com.alev.restaurantrating.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurants_unique_name_idx")})
@@ -10,31 +11,32 @@ public class Restaurant extends NamedEntity {
 
     public Restaurant() {
     }
-    //private Menu menu;
 
     public Restaurant(Restaurant r) {
         super(r.getId(), r.getName());
-    //    this.menu = r.getMenu();
     }
 
     public Restaurant(Integer id, String name) {
         super(id, name);
     }
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "restaurant")
+    private Collection<Vote> votes;
 
-//    public Menu getMenu() {
-//        return menu;
-//    }
-//
-//    public void setMenu(Menu menu) {
-//        this.menu = menu;
-//    }
+    public Collection<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Collection<Vote> votes) {
+        this.votes = votes;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
                 "id=" + id +
                 ", name=" + name +
-//                ", menu=" + menu +
                 '}';
     }
 }

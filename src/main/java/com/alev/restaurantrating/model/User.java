@@ -1,5 +1,6 @@
 package com.alev.restaurantrating.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
@@ -40,8 +41,9 @@ public class User extends NamedEntity {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<Role> roles;
 
-//    @JsonIgnore
-//  protected List<Vote> votes;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
+    protected List<Vote> votes;
 
     public User() {
     }
