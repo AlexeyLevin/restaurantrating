@@ -4,6 +4,7 @@ import com.alev.restaurantrating.model.Dish;
 import com.alev.restaurantrating.repository.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -18,6 +19,7 @@ public class DataJpaDishRepositoryImpl implements DishRepository{
 
 
     @Override
+    @Transactional
     public Dish save(Dish dish, int menuId) {
         if (!dish.isNew() && get(dish.getId(), menuId) == null) {
             return null;

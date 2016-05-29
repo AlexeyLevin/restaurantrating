@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.Collection;
 
 import static com.alev.restaurantrating.util.VoteUtil.createFromTo;
-import static com.alev.restaurantrating.util.VoteUtil.fromTo;
+import static com.alev.restaurantrating.util.VoteUtil.saveFromTo;
 
 @RestController
 @RequestMapping(AdminRestVoteController.REST_URL)
@@ -41,21 +41,15 @@ public class AdminRestVoteController extends AbstractVoteController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody VoteTo voteTo, @PathVariable("id") int id) {
-        super.update(fromTo(voteTo), id);
+        super.update(saveFromTo(voteTo), id);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<VoteTo> createWithLocation(@RequestBody VoteTo voteTo) {
-        Vote created;
-        if (voteTo.getId() == 0) {
-            created = super.create(createFromTo(voteTo));
-        } else {
-            created = super.create(fromTo(voteTo));
-        }
+        Vote created = super.create(createFromTo(voteTo));
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
-
-        return ResponseEntity.created(uriOfNewResource).body(voteTo);
+        return ResponseEntity.created(uriOfNewResource).body(new VoteTo(created));
     }
 }

@@ -42,14 +42,8 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
         return proxy.getAll(userId);
     }
 
-    // Todo: Optimize hibernate query
     @Override
-    @Transactional
     public Vote getWithFields(int id, int userId) {
-        Vote withFields = proxy.getWithUser(id, userId);
-        withFields.setRestaurant(proxy.getWithRestaurant(id,
-                withFields.getUser().getId()).getRestaurant());
-        withFields.setMenu(proxy.getWithMenu(id, userId).getMenu());
-        return withFields;
+        return  proxy.getWithFields(id, userId);
     }
 }

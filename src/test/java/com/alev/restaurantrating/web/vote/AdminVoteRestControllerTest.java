@@ -16,8 +16,6 @@ import java.time.LocalDate;
 import java.util.Collections;
 
 import static com.alev.restaurantrating.ModelTestData.*;
-import static com.alev.restaurantrating.TestUtil.userHttpBasic;
-import static com.alev.restaurantrating.UserTestData.ADMIN;
 import static com.alev.restaurantrating.UserTestData.USER;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -63,12 +61,11 @@ public class AdminVoteRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        VoteTo expected = new VoteTo(new Vote(0, USER, LocalDate.now(), RESTAURANT_2, RESTAURANT_2_MENU));
-        System.out.println(expected);
+        RESTAURANT_2_MENU.setMenuDate(LocalDate.now());
+        VoteTo expected = new VoteTo(new Vote(null, USER, LocalDate.now(), RESTAURANT_2, RESTAURANT_2_MENU));
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(expected))
-                .with(userHttpBasic(ADMIN)));
+                .content(JsonUtil.writeValue(expected)));
 
         VoteTo returned = VOTE_TO_MATCHER.fromJsonAction(action);
         expected.setId(returned.getId());

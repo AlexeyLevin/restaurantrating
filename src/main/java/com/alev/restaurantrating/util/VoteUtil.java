@@ -8,10 +8,10 @@ public class VoteUtil {
     private VoteUtil() {
     }
 
-    public static Vote fromTo(VoteTo voteTo) {
-       return new Vote(voteTo.getId(), voteTo.getUser(), voteTo.getVoteDate(), voteTo.getRestaurant(), voteTo.getMenu());
+    public static Vote saveFromTo(VoteTo voteTo) {
+       return new Vote(voteTo.getId(), UserUtil.createFromTo(voteTo.getUser()), voteTo.getVoteDate(), voteTo.getRestaurant(), voteTo.getMenu());
     }
     public static Vote createFromTo(VoteTo voteTo) {
-        return new Vote(null, voteTo.getUser(), voteTo.getVoteDate(), voteTo.getRestaurant(), voteTo.getMenu());
+        return new Vote(null, UserUtil.createFromTo(voteTo.getUser()), voteTo.getVoteDate(), voteTo.getRestaurant(), voteTo.getMenu());
     }
 }

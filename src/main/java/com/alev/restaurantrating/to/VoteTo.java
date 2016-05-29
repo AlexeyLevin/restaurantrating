@@ -2,8 +2,8 @@ package com.alev.restaurantrating.to;
 
 import com.alev.restaurantrating.model.Menu;
 import com.alev.restaurantrating.model.Restaurant;
-import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.model.Vote;
+import com.alev.restaurantrating.util.UserUtil;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -15,7 +15,7 @@ public class VoteTo implements Serializable {
     private Integer id;
 
     @NotNull
-    protected User user;
+    protected UserTo user;
 
     @NotNull
     protected LocalDate voteDate;
@@ -29,7 +29,7 @@ public class VoteTo implements Serializable {
     public VoteTo() {
     }
 
-    public VoteTo(int id, User user, LocalDate voteDate, Restaurant restaurant, Menu menu) {
+    public VoteTo(int id, UserTo user, LocalDate voteDate, Restaurant restaurant, Menu menu) {
         this.id = id;
         this.user = user;
         this.voteDate = voteDate;
@@ -39,7 +39,7 @@ public class VoteTo implements Serializable {
 
     public VoteTo(Vote vote) {
         this.id = vote.getId();
-        this.user = vote.getUser();
+        this.user = UserUtil.asTo(vote.getUser());
         this.voteDate = vote.getVoteDate();
         this.restaurant = vote.getRestaurant();
         this.menu = vote.getMenu();
@@ -53,11 +53,11 @@ public class VoteTo implements Serializable {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserTo getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUserTo(UserTo user) {
         this.user = user;
     }
 
