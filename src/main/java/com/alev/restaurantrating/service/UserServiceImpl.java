@@ -6,9 +6,12 @@ import com.alev.restaurantrating.to.UserTo;
 import com.alev.restaurantrating.util.UserUtil;
 import com.alev.restaurantrating.util.exceptions.ExceptionUtil;
 import com.alev.restaurantrating.util.exceptions.NotFoundException;
+import com.alev.restaurantrating.web.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service("userService")
-public class UserServiceImpl implements UserService { // , UserDetailsService
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
@@ -79,17 +82,17 @@ public class UserServiceImpl implements UserService { // , UserDetailsService
         repository.save(user);
     }
 
-//    @Override
-//    public LoggedUser loadUserByUsername(String email) throws UsernameNotFoundException {
-//        User u = repository.getByEmail(email.toLowerCase());
-//        if (u == null) {
-//            throw new UsernameNotFoundException("User " + email + " is not found");
-//        }
-//        return new LoggedUser(u);
-//    }
+    @Override
+    public LoggedUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        User u = repository.getByEmail(email.toLowerCase());
+        if (u == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new LoggedUser(u);
+    }
 
-//    @Override
-//    public User getWithVotes(int id) {
-//        return ExceptionUtil.check(repository.getWithVotes(id), id);
-//    }
+    @Override
+    public User getWithVotes(int id) {
+        return ExceptionUtil.check(repository.getWithVotes(id), id);
+    }
 }

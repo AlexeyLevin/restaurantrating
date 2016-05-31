@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.Arrays;
 
 import static com.alev.restaurantrating.ModelTestData.*;
+import static com.alev.restaurantrating.TestUtil.userHttpBasic;
+import static com.alev.restaurantrating.UserTestData.ADMIN;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -27,7 +29,8 @@ public class RestaurantRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + RESTAURANT_1_ID))
+        mockMvc.perform(get(REST_URL + RESTAURANT_1_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -36,7 +39,8 @@ public class RestaurantRestControllerTest extends AbstractControllerTest {
 
 //    @Test
 //    public void testGetName() throws Exception {
-//        mockMvc.perform(get(REST_URL + "by?name=" + RESTAURANT_1.getName()))
+//        mockMvc.perform(get(REST_URL + "by?name=" + RESTAURANT_1.getName())
+//                .with(userHttpBasic(ADMIN)))
 //                .andExpect(status().isOk())
 //                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(RESTAURANT_MATCHER.contentMatcher(RESTAURANT_1));
@@ -44,7 +48,8 @@ public class RestaurantRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + RESTAURANT_1_ID).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete(REST_URL + RESTAURANT_1_ID).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
         RESTAURANT_MATCHER.assertCollectionEquals(Arrays.asList(RESTAURANT_2, RESTAURANT_3), service.getAll());
@@ -56,7 +61,8 @@ public class RestaurantRestControllerTest extends AbstractControllerTest {
         updated.setName("UpdatedName");
         mockMvc.perform(put(REST_URL + RESTAURANT_1_ID)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated)))
+                .content(JsonUtil.writeValue(updated))
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk());
         RESTAURANT_MATCHER.assertEquals(updated, service.get(RESTAURANT_1_ID));
     }
@@ -66,7 +72,9 @@ public class RestaurantRestControllerTest extends AbstractControllerTest {
         Restaurant expected = new Restaurant(null, "new restaurant");
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(expected))).andExpect(status().isCreated());
+                .content(JsonUtil.writeValue(expected))
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isCreated());
 
         Restaurant returned = RESTAURANT_MATCHER.fromJsonAction(action);
         expected.setId(returned.getId());
@@ -77,7 +85,8 @@ public class RestaurantRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        TestUtil.print(mockMvc.perform(get(REST_URL).contentType(MediaType.APPLICATION_JSON))
+        TestUtil.print(mockMvc.perform(get(REST_URL).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(RESTAURANT_MATCHER.contentListMatcher(RESTAURANT_1, RESTAURANT_2, RESTAURANT_3)));

@@ -17,39 +17,39 @@ public class AbstractVoteController {
     private VoteService voteService;
 
     public Vote get(int id) {
-        int userId = LoggedUser.getId();
+        int userId = LoggedUser.id();
         LOG.info("get vote {} for User {}", id, userId);
         return voteService.get(id, userId);
     }
 
     public VoteTo getWithFields(int id) {
-        int userId = LoggedUser.getId();
+        int userId = LoggedUser.id();
         LOG.info("getWithFields vote {} for User {}", id, userId);
         return new VoteTo(voteService.getWithFields(id, userId));
     }
 
     public void delete(int id) {
-        int userId = LoggedUser.getId();
+        int userId = LoggedUser.id();
         LOG.info("delete vote {} for User {}", id, userId);
         voteService.delete(id, userId);
     }
 
     public Collection<Vote> getAll() {
-        int userId = LoggedUser.getId();
+        int userId = LoggedUser.id();
         LOG.info("getAll for User {}", userId);
         return voteService.getAll(userId);
     }
 
     public void update(Vote vote, int id) {
         vote.setId(id);
-        int userId = LoggedUser.getId();
+        int userId = LoggedUser.id();
         LOG.info("update {} for User {}", vote, userId);
         voteService.update(vote, userId);
     }
 
     public Vote create(Vote vote) {
         vote.setId(null);
-        int userId = LoggedUser.getId();
+        int userId = LoggedUser.id();
         LOG.info("create {} for User {}", vote, userId);
         return voteService.save(vote, userId);
     }

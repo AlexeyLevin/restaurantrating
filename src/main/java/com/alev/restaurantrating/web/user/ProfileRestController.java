@@ -16,17 +16,17 @@ public class ProfileRestController extends AbstractUserController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public User get() {
-        return super.get(LoggedUser.getId());
+        return super.get(LoggedUser.id());
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public void delete() {
-        super.delete(LoggedUser.getId());
+        super.delete(LoggedUser.id());
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody UserTo userTo) {
-        userTo.setId(LoggedUser.getId());
+        userTo.setId(LoggedUser.id());
         super.update(userTo);
     }
 

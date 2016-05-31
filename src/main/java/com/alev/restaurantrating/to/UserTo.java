@@ -18,6 +18,7 @@ public class UserTo implements Serializable {
     @NotEmpty
     protected String email;
 
+//    @JsonIgnore
     @Size(min = 5, max = 64, message = " must between 5 and 64 characters")
     protected String password;
 

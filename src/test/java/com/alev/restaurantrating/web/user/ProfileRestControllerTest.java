@@ -30,11 +30,11 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
                 .andExpect(USER_MATCHER.contentMatcher(USER)));
     }
 
-//    @Test
-//    public void testGetUnauth() throws Exception {
-//        mockMvc.perform(get(REST_URL))
-//                .andExpect(status().isUnauthorized());
-//    }
+    @Test
+    public void testGetUnauth() throws Exception {
+        mockMvc.perform(get(REST_URL))
+                .andExpect(status().isUnauthorized());
+    }
 
     @Test
     public void testDelete() throws Exception {

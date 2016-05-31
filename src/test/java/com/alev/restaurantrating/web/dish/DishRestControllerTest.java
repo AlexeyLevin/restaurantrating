@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.Arrays;
 
 import static com.alev.restaurantrating.ModelTestData.*;
+import static com.alev.restaurantrating.TestUtil.userHttpBasic;
+import static com.alev.restaurantrating.UserTestData.ADMIN;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -26,29 +28,34 @@ public class DishRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + DISH_1_MENU_1_ID, RESTAURANT_1_MENU_ID))
+        mockMvc.perform(get(REST_URL + DISH_1_MENU_1_ID, RESTAURANT_1_ID, RESTAURANT_1_MENU_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+
                 .andExpect(DISH_MATCHER.contentMatcher(DISH_1_MENU_1));
     }
 
     @Test
     public void testGetNotFound() throws Exception {
-        mockMvc.perform(get(REST_URL + DISH_1_MENU_1_ID, RESTAURANT_2_MENU_ID))
+        mockMvc.perform(get(REST_URL + DISH_1_MENU_1_ID, RESTAURANT_1_ID, RESTAURANT_2_MENU_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testDeleteNotFound() throws Exception {
-        mockMvc.perform(delete(REST_URL + DISH_1_MENU_3_ID, RESTAURANT_2_MENU_ID))
+        mockMvc.perform(delete(REST_URL + DISH_1_MENU_3_ID, RESTAURANT_2_ID, RESTAURANT_2_MENU_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + DISH_1_MENU_1_ID, RESTAURANT_1_MENU_ID))
+        mockMvc.perform(delete(REST_URL + DISH_1_MENU_1_ID, RESTAURANT_1_ID, RESTAURANT_1_MENU_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk());
         DISH_MATCHER.assertCollectionEquals(Arrays.asList(DISH_4_MENU_1, DISH_3_MENU_1, DISH_2_MENU_1), dishService.getAll(RESTAURANT_1_MENU_ID));
     }
@@ -56,8 +63,9 @@ public class DishRestControllerTest extends AbstractControllerTest {
     @Test
     public void testUpdate() throws Exception {
         Dish updated = new Dish(DISH_1_MENU_1_ID, RESTAURANT_1_NAME + STRING_SOUP + " updated", 3f);
-        mockMvc.perform(put(REST_URL + DISH_1_MENU_1_ID, RESTAURANT_1_MENU_ID).contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated)))
+        mockMvc.perform(put(REST_URL + DISH_1_MENU_1_ID, RESTAURANT_1_ID, RESTAURANT_1_MENU_ID).contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updated))
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk());
         assertEquals(updated, dishService.get(DISH_1_MENU_1_ID, RESTAURANT_1_MENU_ID));
     }
@@ -65,9 +73,10 @@ public class DishRestControllerTest extends AbstractControllerTest {
     @Test
     public void testCreate() throws Exception {
         Dish created = new Dish(RESTAURANT_1_NAME + STRING_SOUP + " updated", 3f);
-        ResultActions action = mockMvc.perform(post(REST_URL, RESTAURANT_1_MENU_ID)
+        ResultActions action = mockMvc.perform(post(REST_URL, RESTAURANT_1_ID, RESTAURANT_1_MENU_ID)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(created)));
+                .content(JsonUtil.writeValue(created))
+                .with(userHttpBasic(ADMIN)));
 
         Dish returned = DISH_MATCHER.fromJsonAction(action);
         created.setId(returned.getId());
@@ -78,7 +87,8 @@ public class DishRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        mockMvc.perform(get(REST_URL, RESTAURANT_2_MENU_ID))
+        mockMvc.perform(get(REST_URL, RESTAURANT_1_ID, RESTAURANT_2_MENU_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

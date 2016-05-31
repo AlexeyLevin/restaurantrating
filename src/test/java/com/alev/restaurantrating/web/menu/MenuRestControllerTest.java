@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static com.alev.restaurantrating.ModelTestData.*;
+import static com.alev.restaurantrating.TestUtil.userHttpBasic;
+import static com.alev.restaurantrating.UserTestData.ADMIN;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -28,7 +30,8 @@ public class MenuRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + RESTAURANT_1_MENU_ID, RESTAURANT_1_ID))
+        mockMvc.perform(get(REST_URL + RESTAURANT_1_MENU_ID, RESTAURANT_1_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -37,20 +40,23 @@ public class MenuRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetNotFound() throws Exception {
-        mockMvc.perform(get(REST_URL + RESTAURANT_1_MENU_ID, RESTAURANT_2_ID))
+        mockMvc.perform(get(REST_URL + RESTAURANT_1_MENU_ID, RESTAURANT_2_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testDeleteNotFound() throws Exception {
-        mockMvc.perform(delete(REST_URL + RESTAURANT_3_MENU_ID, RESTAURANT_1_ID))
+        mockMvc.perform(delete(REST_URL + RESTAURANT_3_MENU_ID, RESTAURANT_1_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + RESTAURANT_1_MENU_ID, RESTAURANT_1_ID))
+        mockMvc.perform(delete(REST_URL + RESTAURANT_1_MENU_ID, RESTAURANT_1_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk());
         assertTrue(menuService.getAll(RESTAURANT_1_ID).isEmpty());
     }
@@ -59,7 +65,8 @@ public class MenuRestControllerTest extends AbstractControllerTest {
     public void testUpdate() throws Exception {
         Menu updated = new Menu(RESTAURANT_1_MENU_ID, RESTAURANT_1_NAME + STRING_MENU + " updated", VOTE_DAY);
         mockMvc.perform(put(REST_URL + RESTAURANT_1_MENU_ID, RESTAURANT_1_ID).contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated)))
+                .content(JsonUtil.writeValue(updated))
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk());
         assertEquals(updated, menuService.get(RESTAURANT_1_MENU_ID, RESTAURANT_1_ID));
     }
@@ -69,7 +76,8 @@ public class MenuRestControllerTest extends AbstractControllerTest {
         Menu created = new Menu(RESTAURANT_1_NAME + STRING_MENU + " created", NEXT_VOTE_DAY);
         ResultActions action = mockMvc.perform(post(REST_URL, RESTAURANT_1_ID)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(created)));
+                .content(JsonUtil.writeValue(created))
+                .with(userHttpBasic(ADMIN)));
 
         Menu returned = MENU_MATCHER.fromJsonAction(action);
         created.setId(returned.getId());
@@ -80,7 +88,8 @@ public class MenuRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        mockMvc.perform(get(REST_URL, RESTAURANT_2_ID))
+        mockMvc.perform(get(REST_URL, RESTAURANT_2_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
