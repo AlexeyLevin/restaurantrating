@@ -1,6 +1,7 @@
 package com.alev.restaurantrating.web.dish;
 
 import com.alev.restaurantrating.model.Dish;
+import com.alev.restaurantrating.web.ExceptionInfoHandler;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AdminRestDishController.REST_URL)
-public class AdminRestDishController extends AbstractDishController {
+public class AdminRestDishController extends AbstractDishController implements ExceptionInfoHandler {
     public static final String REST_URL = "/rest/admin/restaurants/{restaurantId}/menus/{menuId}/dishes";
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
