@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +16,8 @@ import static com.alev.restaurantrating.ModelTestData.*;
 import static com.alev.restaurantrating.Profiles.DATAJPA;
 import static com.alev.restaurantrating.UserTestData.USER;
 import static com.alev.restaurantrating.UserTestData.USER_ID;
+import static com.alev.restaurantrating.util.VoteUtil.DEFAULT_MAX_VOTE_TIME;
+import static com.alev.restaurantrating.util.VoteUtil.setMaxVoteTime;
 import static junit.framework.TestCase.assertTrue;
 
 @ActiveProfiles(DATAJPA)
@@ -25,10 +28,12 @@ public class VoteServiceTest extends AbstractServiceTest {
 
     @Test
     public void testSave() {
+        setMaxVoteTime(LocalTime.MAX);
         Vote vote = new Vote(null, USER, NEXT_VOTE_DAY.plusDays(1), RESTAURANT_3, RESTAURANT_3_MENU);
         Vote created = service.save(vote, USER_ID);
         vote.setId(created.getId());
         VOTE_MATCHER.assertCollectionEquals(Arrays.asList(created, USER_VOTE_2, USER_VOTE_1), service.getAll(USER_ID));
+        setMaxVoteTime(DEFAULT_MAX_VOTE_TIME);
     }
 
     @Test
@@ -47,18 +52,22 @@ public class VoteServiceTest extends AbstractServiceTest {
 
     @Test
     public void testUpdate() {
+        setMaxVoteTime(LocalTime.MAX);
         Vote updated = new Vote(USER_VOTE_2);
         updated.setRestaurant(RESTAURANT_3);
         updated.setMenu(RESTAURANT_3_MENU);
         service.update(updated, USER_ID);
         VOTE_MATCHER.assertEquals(updated, service.get(USER_VOTE_2_ID, USER_ID));
+        setMaxVoteTime(DEFAULT_MAX_VOTE_TIME);
     }
 
     @Test
     public void testGetAll() {
+        setMaxVoteTime(LocalTime.MAX);
         Vote vote = new Vote(null, USER, NEXT_VOTE_DAY.plusDays(1), RESTAURANT_3, RESTAURANT_3_MENU);
         service.save(vote, USER_ID);
         VOTE_MATCHER.assertCollectionEquals(Arrays.asList(vote, USER_VOTE_2, USER_VOTE_1), service.getAll(USER_ID));
+        setMaxVoteTime(DEFAULT_MAX_VOTE_TIME);
     }
 
     @Test
