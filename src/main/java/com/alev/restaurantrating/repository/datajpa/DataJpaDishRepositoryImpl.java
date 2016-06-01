@@ -60,6 +60,7 @@ public class DataJpaDishRepositoryImpl implements DishRepository{
     }
 
     @Override
+    @Transactional
     public Dish getWithMenu(int id, int menuId, int restaurantId) {
         if (proxyMenuRepository.get(menuId, restaurantId) == null) {
             return null;

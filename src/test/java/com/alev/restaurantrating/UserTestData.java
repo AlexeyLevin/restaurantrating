@@ -4,6 +4,7 @@ import com.alev.restaurantrating.matcher.ModelMatcher;
 import com.alev.restaurantrating.model.Role;
 import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.util.PasswordUtil;
+import com.alev.restaurantrating.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,17 +43,16 @@ public class UserTestData {
         }
 
         public User asUser() {
-            return new User(this);
+            return UserUtil.prepareToSave(new User(this));
         }
 
-        @Override
         public String toString() {
             return "User (" +
                     "id=" + id +
                     ", email=" + email +
                     ", name=" + name +
                     ", enabled=" + enabled +
-//                    ", password=" + password +
+                    ", password=" + password +
                     ", authorities=" + roles +
                     ')';
         }
@@ -67,8 +67,8 @@ public class UserTestData {
             }
 
             TestUser that = (TestUser) o;
-            return /*Objects.equals(this.password, that.password)
-                    &&*/ Objects.equals(this.id, that.id)
+            return comparePassword(this.password, that.password)
+                    && Objects.equals(this.id, that.id)
                     && Objects.equals(this.name, that.name)
                     && Objects.equals(this.email, that.email)
                     && Objects.equals(this.enabled, that.enabled)
