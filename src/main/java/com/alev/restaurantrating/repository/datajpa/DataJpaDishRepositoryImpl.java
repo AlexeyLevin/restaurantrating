@@ -17,11 +17,10 @@ public class DataJpaDishRepositoryImpl implements DishRepository{
     @Autowired
     private ProxyMenuRepository proxyMenuRepository;
 
-
     @Override
     @Transactional
-    public Dish save(Dish dish, int menuId) {
-        if (!dish.isNew() && get(dish.getId(), menuId) == null) {
+    public Dish save(Dish dish, int menuId, int restaurantId) {
+        if (!dish.isNew() && get(dish.getId(), menuId, restaurantId) == null) {
             return null;
         }
         dish.setMenu(proxyMenuRepository.getOne(menuId));
@@ -29,17 +28,29 @@ public class DataJpaDishRepositoryImpl implements DishRepository{
     }
 
     @Override
-    public boolean delete(int id, int menuId) {
+    @Transactional
+    public boolean delete(int id, int menuId, int restaurantId) {
+        if (proxyMenuRepository.get(menuId, restaurantId) == null) {
+            return false;
+        }
         return proxy.delete(id, menuId) != 0;
     }
 
     @Override
-    public Dish get(int id, int menuId) {
+    @Transactional
+    public Dish get(int id, int menuId, int restaurantId) {
+        if (proxyMenuRepository.get(menuId, restaurantId) == null) {
+            return null;
+        }
         return proxy.get(id, menuId);
     }
 
     @Override
-    public Collection<Dish> getAll(int menuId) {
+    @Transactional
+    public Collection<Dish> getAll(int menuId, int restaurantId) {
+        if (proxyMenuRepository.get(menuId, restaurantId) == null) {
+            return null;
+        }
         return proxy.getAll(menuId);
     }
 
@@ -49,7 +60,10 @@ public class DataJpaDishRepositoryImpl implements DishRepository{
     }
 
     @Override
-    public Dish getWithMenu(int id, int menuId) {
+    public Dish getWithMenu(int id, int menuId, int restaurantId) {
+        if (proxyMenuRepository.get(menuId, restaurantId) == null) {
+            return null;
+        }
         return proxy.getWithMenu(id, menuId);
     }
 }

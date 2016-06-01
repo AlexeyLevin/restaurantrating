@@ -57,7 +57,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
         mockMvc.perform(delete(REST_URL + DISH_1_MENU_1_ID, RESTAURANT_1_ID, RESTAURANT_1_MENU_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk());
-        DISH_MATCHER.assertCollectionEquals(Arrays.asList(DISH_4_MENU_1, DISH_3_MENU_1, DISH_2_MENU_1), dishService.getAll(RESTAURANT_1_MENU_ID));
+        DISH_MATCHER.assertCollectionEquals(Arrays.asList(DISH_4_MENU_1, DISH_3_MENU_1, DISH_2_MENU_1), dishService.getAll(RESTAURANT_1_MENU_ID, RESTAURANT_1_ID));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(updated))
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk());
-        assertEquals(updated, dishService.get(DISH_1_MENU_1_ID, RESTAURANT_1_MENU_ID));
+        assertEquals(updated, dishService.get(DISH_1_MENU_1_ID, RESTAURANT_1_MENU_ID, RESTAURANT_1_ID));
     }
 
     @Test
@@ -82,12 +82,12 @@ public class DishRestControllerTest extends AbstractControllerTest {
         created.setId(returned.getId());
 
         DISH_MATCHER.assertEquals(created, returned);
-        DISH_MATCHER.assertCollectionEquals(Arrays.asList(DISH_4_MENU_1, DISH_3_MENU_1, DISH_2_MENU_1, DISH_1_MENU_1, created), dishService.getAll(RESTAURANT_1_MENU_ID));
+        DISH_MATCHER.assertCollectionEquals(Arrays.asList(DISH_4_MENU_1, DISH_3_MENU_1, DISH_2_MENU_1, DISH_1_MENU_1, created), dishService.getAll(RESTAURANT_1_MENU_ID, RESTAURANT_1_ID));
     }
 
     @Test
     public void testGetAll() throws Exception {
-        mockMvc.perform(get(REST_URL, RESTAURANT_1_ID, RESTAURANT_2_MENU_ID)
+        mockMvc.perform(get(REST_URL, RESTAURANT_2_ID, RESTAURANT_2_MENU_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())

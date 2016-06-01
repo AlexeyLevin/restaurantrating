@@ -6,17 +6,17 @@ import com.alev.restaurantrating.util.exceptions.NotFoundException;
 import java.util.Collection;
 
 public interface DishService {
-    Dish get(int id, int menuId) throws NotFoundException;
+    Dish get(int id, int menuId, int restaurantId) throws NotFoundException;
 
-    void delete(int id, int menuId) throws NotFoundException;
+    void delete(int id, int menuId, int restaurantId) throws NotFoundException;
 
-    Collection<Dish> getAll(int menuId);
+    Collection<Dish> getAll(int menuId, int restaurantId);
 
     Dish findByName(String name) throws NotFoundException;
 
-    Dish update(Dish dish, int menuId);
+    Dish update(Dish dish, int menuId, int restaurantId);
 
-    Dish save(Dish dish, int menuId);
+    Dish create(Dish dish, int menuId, int restaurantId);
 
-    Dish getWithMenu(int id, int menuId);
+    Dish getWithMenu(int id, int menuId, int restaurantId);
 }

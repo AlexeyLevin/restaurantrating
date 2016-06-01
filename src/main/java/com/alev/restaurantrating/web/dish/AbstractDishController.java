@@ -14,35 +14,36 @@ public class AbstractDishController {
     @Autowired
     private DishService dishService;
 
-    public Dish get(int id, int menuId) {
-        LOG.info("get dish {} for Menu {}", id, menuId);
-        return dishService.get(id, menuId);
+
+    public Dish get(int id, int menuId, int restaurantId) {
+        LOG.info("get dish {} for Menu {} of Restaurant ", id, menuId, restaurantId);
+        return dishService.get(id, menuId, restaurantId);
     }
 
-    public Dish getWithMenu(int id, int menuId)  {
-        LOG.info("getWithMenu {} for Menu {}", id, menuId);
-        return dishService.getWithMenu(id, menuId);
+    public Dish getWithMenu(int id, int menuId, int restaurantId)  {
+        LOG.info("getWithMenu {} for Menu {} of Restaurant ", id, menuId, restaurantId);
+        return dishService.getWithMenu(id, menuId, restaurantId);
     }
 
-    public void delete(int id, int menuId) {
-        LOG.info("delete dish {} for Menu {}", id, menuId);
-        dishService.delete(id, menuId);
+    public void delete(int id, int menuId, int restaurantId) {
+        LOG.info("delete dish {} for Menu {} of Restaurant ", id, menuId, restaurantId);
+        dishService.delete(id, menuId, restaurantId);
     }
 
-    public Collection<Dish> getAll(int menuId) {
-        LOG.info("getAll for Menu {}", menuId);
-        return dishService.getAll(menuId);
+    public Collection<Dish> getAll(int menuId, int restaurantId) {
+        LOG.info("getAll for Menu {} of Restaurant ", menuId, restaurantId);
+        return dishService.getAll(menuId, restaurantId);
     }
 
-    public void update(Dish dish, int id, int menuId) {
+    public void update(Dish dish, int id, int menuId, int restaurantId) {
         dish.setId(id);
-        LOG.info("update {} for Menu {}", dish, menuId);
-        dishService.update(dish, menuId);
+        LOG.info("update {} for Menu {} of Restaurant ", id, menuId, restaurantId);
+        dishService.update(dish, menuId, restaurantId);
     }
 
-    public Dish create(Dish dish, int menuId) {
+    public Dish create(Dish dish, int menuId, int restaurantId) {
         dish.setId(null);
-        LOG.info("create {} for Menu {}", dish, menuId);
-        return dishService.save(dish, menuId);
+        LOG.info("create {} for Menu {} of Restaurant ", menuId, restaurantId);
+        return dishService.create(dish, menuId, restaurantId);
     }
 }
