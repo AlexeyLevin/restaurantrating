@@ -2,6 +2,7 @@ package com.alev.restaurantrating.web.vote;
 
 import com.alev.restaurantrating.model.Vote;
 import com.alev.restaurantrating.to.VoteTo;
+import com.alev.restaurantrating.util.VoteUtil;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.alev.restaurantrating.util.VoteUtil.createFromTo;
 import static com.alev.restaurantrating.util.VoteUtil.saveFromTo;
@@ -27,6 +30,16 @@ public class AdminRestVoteController extends AbstractVoteController {
     @RequestMapping(value = "/getFullVote/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public VoteTo getWithFields(@PathVariable("id") int id) {
         return super.getWithFields(id);
+    }
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<VoteTo> getAllVotesForAll() {
+        LinkedList<VoteTo> voteTos = new LinkedList<>();
+        super.getAllVotesForAllUsers()
+                .parallelStream()
+                .map(VoteUtil::createToWithoutUser)
+                .forEach(voteTos::add);
+        return voteTos;
     }
 
     @RequestMapping(value = "/getWithoutUser/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

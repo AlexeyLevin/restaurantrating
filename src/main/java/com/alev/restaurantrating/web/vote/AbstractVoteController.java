@@ -60,4 +60,8 @@ public class AbstractVoteController {
         LOG.info("create {} for User {}", vote, userId);
         return voteService.save(vote, userId);
     }
+
+    public Collection<Vote> getAllVotesForAllUsers() {
+        return voteService.getAllVotesForAllUsers();
+    }
 }

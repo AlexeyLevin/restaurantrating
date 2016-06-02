@@ -57,4 +57,9 @@ public class VoteServiceImpl implements VoteService {
     public Vote getWithoutUser(int id, int userId) {
         return repository.getWithoutUser(id, userId);
     }
+
+    @Override
+    public Collection<Vote> getAllVotesForAllUsers() {
+        return repository.getAllVotesForAllUsers();
+    }
 }

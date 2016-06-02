@@ -21,4 +21,6 @@ public interface VoteRepository {
     Vote getWithFields(int id, int userId);
 
     Vote getWithoutUser(int id, int userId);
+
+    Collection<Vote> getAllVotesForAllUsers();
 }

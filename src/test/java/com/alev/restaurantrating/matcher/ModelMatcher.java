@@ -21,8 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @param <R> : testEntity, converter result for compare
  */
 public class ModelMatcher<T, R> {
-    protected Function<T, R> entityConverter;
-    protected Class<T> entityClass;
+    private Function<T, R> entityConverter;
+    private Class<T> entityClass;
 
     public ModelMatcher(Function<T, R> entityConverter, Class<T> entityClass) {
         this.entityConverter = entityConverter;
@@ -45,7 +45,7 @@ public class ModelMatcher<T, R> {
         Assert.assertEquals(map(expected, entityConverter), map(actual, entityConverter));
     }
 
-    public static <S, T> List<T> map(Collection<S> collection, Function<S, T> converter) {
+    private static <S, T> List<T> map(Collection<S> collection, Function<S, T> converter) {
         return collection.stream().map(converter).collect(Collectors.toList());
     }
 
@@ -61,6 +61,7 @@ public class ModelMatcher<T, R> {
                 });
     }
 
+    @SafeVarargs
     public final ResultMatcher contentListMatcher(T... expected) {
         return contentListMatcher(Arrays.asList(expected));
     }

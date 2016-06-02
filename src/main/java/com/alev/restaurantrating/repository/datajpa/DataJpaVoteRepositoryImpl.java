@@ -51,4 +51,9 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
     public Vote getWithoutUser(int id, int userId) {
         return  proxy.getWithoutUser(id, userId);
     }
+
+    @Override
+    public Collection<Vote> getAllVotesForAllUsers() {
+        return proxy.getAllVotesForAllUsers();
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -30,12 +31,16 @@ public interface ProxyVoteRepository extends JpaRepository<Vote, Integer> {
     @Query("SELECT v FROM Vote v JOIN FETCH v.user JOIN FETCH v.restaurant JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
     Vote getWithFields(@Param("id")Integer id, @Param("userId")Integer userId);
 
-    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id =:id and v.user.id =:userId")
-    Vote getWithRestaurant(@Param("id")Integer id, @Param("userId")Integer userId);
-
-    @Query("SELECT v FROM Vote v JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
-    Vote getWithMenu(@Param("id")Integer id, @Param("userId")Integer userId);
-
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
     Vote getWithoutUser(@Param("id")Integer id, @Param("userId") int userId);
+
+    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant JOIN FETCH v.menu ORDER BY v.voteDate DESC")
+    Collection<Vote> getAllVotesForAllUsers();
+
+//    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id =:id and v.user.id =:userId")
+//    Vote getWithRestaurant(@Param("id")Integer id, @Param("userId")Integer userId);
+//
+//    @Query("SELECT v FROM Vote v JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
+//    Vote getWithMenu(@Param("id")Integer id, @Param("userId")Integer userId);
+
 }
