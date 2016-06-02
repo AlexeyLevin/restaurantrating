@@ -53,4 +53,8 @@ public class VoteServiceImpl implements VoteService {
     public Vote getWithFields(int id, int userId) {
         return repository.getWithFields(id, userId);
     }
+
+    public Vote getWithoutUser(int id, int userId) {
+        return repository.getWithoutUser(id, userId);
+    }
 }

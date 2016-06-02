@@ -41,7 +41,7 @@ public class DataJpaRestaurantRepositoryImpl implements RestaurantRepository {
     }
 
 //    @Override
-//    public User getWithMenus(int id) {
-//        return getWithVotes(id);
+//    public Restaurant getWithMenus(int id) {
+//        return proxy.getWithMenus(id);
 //    }
 }

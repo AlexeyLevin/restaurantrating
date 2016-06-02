@@ -29,6 +29,11 @@ public class AdminRestVoteController extends AbstractVoteController {
         return super.getWithFields(id);
     }
 
+    @RequestMapping(value = "/getWithoutUser/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public VoteTo getWithoutUser(@PathVariable("id") int id) {
+        return super.getWithoutUser(id);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") int id) {
         super.delete(id);

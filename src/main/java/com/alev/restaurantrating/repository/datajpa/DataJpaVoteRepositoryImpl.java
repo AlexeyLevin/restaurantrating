@@ -46,4 +46,9 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
     public Vote getWithFields(int id, int userId) {
         return  proxy.getWithFields(id, userId);
     }
+
+    @Override
+    public Vote getWithoutUser(int id, int userId) {
+        return  proxy.getWithoutUser(id, userId);
+    }
 }

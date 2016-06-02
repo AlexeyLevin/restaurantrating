@@ -41,9 +41,9 @@ public abstract class AbstractRestaurantController {
         restaurantService.update(restaurant);
     }
 
-//    public void update(RestaurantTo restaurantTo) {
-//        LOG.info("update " + restaurantTo);
-//        restaurantService.update(restaurantTo);
+//    public Restaurant getWithMenus(int id) {
+//        LOG.info("get " + id);
+//        return restaurantService.getWithMenus(id);
 //    }
 
 //    public Restaurant getByName(String name) {

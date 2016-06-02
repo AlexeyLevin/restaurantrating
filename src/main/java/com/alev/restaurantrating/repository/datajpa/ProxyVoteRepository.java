@@ -35,4 +35,7 @@ public interface ProxyVoteRepository extends JpaRepository<Vote, Integer> {
 
     @Query("SELECT v FROM Vote v JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
     Vote getWithMenu(@Param("id")Integer id, @Param("userId")Integer userId);
+
+    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
+    Vote getWithoutUser(@Param("id")Integer id, @Param("userId") int userId);
 }

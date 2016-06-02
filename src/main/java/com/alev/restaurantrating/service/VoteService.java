@@ -19,6 +19,8 @@ public interface VoteService {
 
     Vote getWithFields(int id, int userId);
 
+    Vote getWithoutUser(int id, int userId);
+
     default Collection<Vote> getAllByDate(LocalDate date) {
         throw new UnsupportedOperationException();
     }

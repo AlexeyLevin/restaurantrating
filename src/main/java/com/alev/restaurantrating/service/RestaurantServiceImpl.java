@@ -46,4 +46,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<Restaurant> getAll() {
         return repository.getAll();
     }
+
+//    @Override
+//    public Restaurant getWithMenus(int id) throws NotFoundException {
+//        return repository.getWithMenus(id);
+//    }
 }

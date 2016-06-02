@@ -30,6 +30,6 @@ public interface ProxyRestaurantRepository extends JpaRepository<Restaurant, Int
 
     Restaurant findByName(String name);
 
-//    @Query("SELECT r FROM Restaurant r LEFT JOIN FETCH r.votes WHERE r.id = ?1")
-//    Restaurant getWithVotes(Integer id);
+//    @Query("SELECT r FROM Restaurant r LEFT JOIN FETCH r.menus WHERE r.id = ?1")
+//    Restaurant getWithMenus(Integer id);
 }

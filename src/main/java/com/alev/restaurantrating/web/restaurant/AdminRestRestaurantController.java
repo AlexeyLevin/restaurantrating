@@ -16,11 +16,13 @@ public class AdminRestRestaurantController extends AbstractRestaurantController 
 
     public static final String REST_URL = "/rest/admin/restaurants";
 
+    @Override
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAll() {
         return super.getAll();
     }
 
+    @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant get(@PathVariable("id") int id) {
         return super.get(id);
@@ -37,11 +39,13 @@ public class AdminRestRestaurantController extends AbstractRestaurantController 
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
+    @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
     }
 
+    @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Restaurant restaurant, @PathVariable("id") int id) {
         super.update(restaurant, id);
@@ -50,5 +54,11 @@ public class AdminRestRestaurantController extends AbstractRestaurantController 
 //    @RequestMapping(value = "/by", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 //    public Restaurant getByName(@RequestParam("name") String name) {
 //        return super.getByName(name);
+//    }
+
+//    @Override
+//    @RequestMapping(value = "/withMenus/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public Restaurant getWithMenus(@PathVariable("id") int id) {
+//        return super.getWithMenus(id);
 //    }
 }
