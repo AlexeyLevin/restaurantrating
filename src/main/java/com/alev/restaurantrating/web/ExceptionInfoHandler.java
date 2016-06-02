@@ -2,6 +2,7 @@ package com.alev.restaurantrating.web;
 
 import com.alev.restaurantrating.util.exceptions.ErrorInfo;
 import com.alev.restaurantrating.util.exceptions.NotFoundException;
+import com.alev.restaurantrating.util.exceptions.VoteException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -44,6 +45,17 @@ public interface ExceptionInfoHandler {
         StringBuilder sb = new StringBuilder();
         result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
         return new ErrorInfo(req.getRequestURL().toString(),"ValidationException", sb.toString());
+    }
+
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    @ExceptionHandler(VoteException.class)
+    @ResponseBody
+    @Order(Ordered.HIGHEST_PRECEDENCE + 3)
+    default ErrorInfo voteDateError(HttpServletRequest req, BindingResult result) {
+        LOG.error("ValidationException at request " + req.getRequestURL());
+        StringBuilder sb = new StringBuilder();
+        result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
+        return new ErrorInfo(req.getRequestURL().toString(),"VoteDateException", sb.toString());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
