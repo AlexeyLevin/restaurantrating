@@ -2,7 +2,6 @@ package com.alev.restaurantrating.service;
 
 import com.alev.restaurantrating.model.Dish;
 import com.alev.restaurantrating.repository.DishRepository;
-import com.alev.restaurantrating.repository.MenuRepository;
 import com.alev.restaurantrating.util.exceptions.ExceptionUtil;
 import com.alev.restaurantrating.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,6 @@ public class DishServiceImpl implements DishService {
 
     @Autowired
     private DishRepository repository;
-
-    @Autowired
-    private MenuRepository menuRepository;
 
     @Override
     public Dish get(int id, int menuId, int restaurantId) throws NotFoundException {
