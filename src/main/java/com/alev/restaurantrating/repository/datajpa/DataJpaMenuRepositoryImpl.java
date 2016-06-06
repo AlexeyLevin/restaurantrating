@@ -2,6 +2,7 @@ package com.alev.restaurantrating.repository.datajpa;
 
 import com.alev.restaurantrating.model.Menu;
 import com.alev.restaurantrating.repository.MenuRepository;
+import com.alev.restaurantrating.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,14 +15,14 @@ public class DataJpaMenuRepositoryImpl implements MenuRepository {
     private ProxyMenuRepository proxy;
 
     @Autowired
-    private ProxyRestaurantRepository proxyRestaurantRepository;
+    private RestaurantRepository repository;
 
     @Override
     public Menu save(Menu menu, int restaurantId) {
         if (!menu.isNew() && get(menu.getId(), restaurantId) == null) {
             return null;
         }
-        menu.setRestaurant(proxyRestaurantRepository.getOne(restaurantId));
+        menu.setRestaurant(repository.get(restaurantId));
         return proxy.save(menu);
     }
 

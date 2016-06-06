@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional(readOnly = true)
 public interface ProxyDishRepository extends JpaRepository<Dish, Integer> {
 
     @Query("SELECT m FROM Dish m WHERE m.id=:id AND m.menu.id=:menuId")

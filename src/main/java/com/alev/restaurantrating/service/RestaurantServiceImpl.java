@@ -23,7 +23,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void delete(int id) throws NotFoundException {
-        ExceptionUtil.check(repository.delete(id), id);
+        ExceptionUtil.check(repository.deleting(id), id);
     }
 
     @Override
