@@ -44,13 +44,23 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean deleting(Integer id) {
         return repository.remove(id) != null;
     }
 
     @Override
-    public User get(int id) {
+    public User get(Integer id) {
         return repository.get(id);
+    }
+
+    @Override
+    public User findByName(String name) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public User getWithFields(Integer integer) {
+        throw new UnsupportedOperationException();
     }
 
     @Override

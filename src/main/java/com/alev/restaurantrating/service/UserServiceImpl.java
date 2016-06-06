@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @CacheEvict(value = "users", allEntries = true)
     @Override
     public void delete(int id) {
-        ExceptionUtil.check(repository.delete(id), id);
+        ExceptionUtil.check(repository.deleting(id), id);
     }
 
     @Override
@@ -93,6 +93,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User getWithVotes(int id) {
-        return ExceptionUtil.check(repository.getWithVotes(id), id);
+        return ExceptionUtil.check(repository.getWithFields(id), id);
     }
 }

@@ -1,6 +1,7 @@
 package com.alev.restaurantrating.repository.datajpa;
 
 import com.alev.restaurantrating.model.Vote;
+import com.alev.restaurantrating.repository.UserRepository;
 import com.alev.restaurantrating.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
     private ProxyVoteRepository proxy;
 
     @Autowired
-    private ProxyUserRepository userProxy;
+    private UserRepository userRepository;
 
     @Override
     @Transactional
@@ -23,7 +24,7 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
         if (!vote.isNew() && get(vote.getId(), userId) == null) {
             return null;
         }
-        vote.setUser(userProxy.getOne(userId));
+        vote.setUser(userRepository.get(userId));
         return proxy.save(vote);
     }
 
