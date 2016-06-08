@@ -2,54 +2,55 @@ package com.alev.restaurantrating.repository.datajpa;
 
 import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-public class DataJpaUserRepositoryImpl implements UserRepository {
-    private static final Sort SORT_NAME_EMAIL = new Sort("name", "email");
+@Transactional(readOnly = true)
+interface DataJpaUserRepositoryImpl extends JpaRepository<User, Integer>, UserRepository {
+    Sort SORT_NAME_EMAIL = new Sort("name", "email");
 
-    @Autowired
-    private ProxyUserRepository proxy;
+    @Transactional
+    @Modifying
+    @Override
+    default boolean delete(int id) {
+        return deleting(id) != 0;
+    }
 
-//    public void checkModificationAllowed(Integer id) {
-//        if (id != null && id < BaseEntity.START_SEQ + 2) {
-//            throw new ValidationException("Admin/User modification is not allowed. <br><br><a class=\"btn btn-primary btn-lg\" role=\"button\" href=\"register\">Register &raquo;</a> your own please.");
-//        }
-//    }
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM User u WHERE u.id=:id")
+    int deleting(@Param("id") int id);
 
     @Override
-    public User save(User user) {
-//        checkModificationAllowed(user.getId());
-        return proxy.save(user);
+    default User get(int id) {
+        return findOne(id);
     }
 
     @Override
-    public boolean delete(int id) {
-//        checkModificationAllowed(id);
-        return proxy.delete(id) != 0;
+    default List<User> getAll() {
+        return findAll(SORT_NAME_EMAIL);
     }
 
     @Override
-    public User get(int id) {
-        return proxy.findOne(id);
-    }
+    @Transactional
+    User save(User user);
 
     @Override
-    public User getByEmail(String email) {
-        return proxy.getByEmail(email);
-    }
+    User findOne(Integer id);
 
     @Override
-    public List<User> getAll() {
-        return proxy.findAll(SORT_NAME_EMAIL);
-    }
+    List<User> findAll(Sort sort);
 
-//    @Override
-//    public User getWithVotes(int id) {
-//        return proxy.getWithVotes(id);
-//    }
+    User getByEmail(String email);
+
+//    @Query("SELECT u FROM User u LEFT JOIN FETCH u.votes WHERE u.id = ?1")
+//    User getWithVotes(Integer id);
 }

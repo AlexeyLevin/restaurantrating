@@ -1,63 +1,67 @@
 package com.alev.restaurantrating.repository.datajpa;
 
 import com.alev.restaurantrating.model.Menu;
+import com.alev.restaurantrating.model.Restaurant;
 import com.alev.restaurantrating.repository.MenuRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.List;
 
 @Repository
-public class DataJpaMenuRepositoryImpl implements MenuRepository {
+@Transactional(readOnly = true)
+public interface DataJpaMenuRepositoryImpl extends MenuRepository, JpaRepository<Menu, Integer> {
 
-    @Autowired
-    private ProxyMenuRepository proxy;
-
-    @Autowired
-    private ProxyRestaurantRepository proxyRestaurantRepository;
+    @Query("SELECT r FROM Restaurant r WHERE r.id=:id")
+    Restaurant getRestaurant(@Param("id") int id);
 
     @Override
-    public Menu save(Menu menu, int restaurantId) {
+    @Transactional
+    default Menu save(Menu menu, int restaurantId) {
         if (!menu.isNew() && get(menu.getId(), restaurantId) == null) {
             return null;
         }
-        menu.setRestaurant(proxyRestaurantRepository.getOne(restaurantId));
-        return proxy.save(menu);
+        menu.setRestaurant(getRestaurant(restaurantId));
+        return save(menu);
     }
 
     @Override
-    public boolean delete(int id, int restaurantId) {
-        return proxy.delete(id, restaurantId) != 0;
-    }
+    @Transactional
+    Menu save(Menu menu);
 
     @Override
-    public Menu get(int id, int restaurantId) {
-        return proxy.get(id, restaurantId);
+    default boolean delete(int id, int restaurantId) {
+        return deleting(id, restaurantId) != 0;
     }
 
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Menu m WHERE m.id=:id AND m.restaurant.id=:restaurantId")
+    int deleting(@Param("id") int id, @Param("restaurantId") int restaurantId);
+
+    @Query("SELECT m FROM Menu m WHERE m.id=:id AND m.restaurant.id=:restaurantId")
     @Override
-    public Collection<Menu> getAll(int restaurantId) {
-        return proxy.getAll(restaurantId);
-    }
+    Menu get(@Param("id") int id, @Param("restaurantId") int restaurantId);
 
     @Override
-    public Menu findByName(String name) {
-        return proxy.findByName(name);
-    }
+    @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.menuDate DESC")
+    List<Menu> getAll(@Param("restaurantId") int restaurantId);
+
+    @Query("SELECT m FROM Menu m JOIN FETCH m.restaurant WHERE m.id = :id and m.restaurant.id = :restaurantId")
+    @Override
+    Menu getWithRestaurant(@Param("id")int id, @Param("restaurantId") int restaurantId);
+
+    @Query("SELECT m FROM Menu m LEFT JOIN FETCH m.dishes WHERE m.id=:id")
+    @Override
+    Menu getWithDishes(@Param("id")int id);
 
     @Override
-    public Menu getWithRestaurant(int id, int restaurantId) {
-        return proxy.getWithRestaurant(id, restaurantId);
-    }
+    Menu findOne(Integer id);
 
     @Override
-    public Menu getWithDishes(int id) {
-        return proxy.getWithDishes(id);
-    }
+    Menu findByName(String name);
 }
-
-//    @Override
-//    public Menu get(int id) {
-//        return proxy.findOne(id);
-//    }
-//

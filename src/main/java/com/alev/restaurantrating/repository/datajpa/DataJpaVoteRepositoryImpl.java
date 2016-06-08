@@ -1,59 +1,69 @@
 package com.alev.restaurantrating.repository.datajpa;
 
+import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.model.Vote;
 import com.alev.restaurantrating.repository.VoteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 @Repository
-public class DataJpaVoteRepositoryImpl implements VoteRepository {
+@Transactional(readOnly = true)
+interface DataJpaVoteRepositoryImpl extends VoteRepository, JpaRepository<Vote, Integer> {
 
-    @Autowired
-    private ProxyVoteRepository proxy;
-
-    @Autowired
-    private ProxyUserRepository userProxy;
+    @Query("SELECT u FROM User u WHERE u.id=:id")
+    User getUser(@Param("id") int id);
 
     @Override
     @Transactional
-    public Vote save(Vote vote, int userId) {
+    default Vote save(Vote vote, int userId) {
         if (!vote.isNew() && get(vote.getId(), userId) == null) {
             return null;
         }
-        vote.setUser(userProxy.getOne(userId));
-        return proxy.save(vote);
+        vote.setUser(getUser(userId));
+        return save(vote);
     }
 
     @Override
-    public boolean delete(int id, int userId) {
-        return proxy.delete(id, userId) != 0;
+    @Modifying
+    @Transactional
+    default boolean delete(int id, int userId) {
+        return deleting(id, userId) != 0;
     }
 
-    @Override
-    public Vote get(int id, int userId) {
-        return proxy.get(id, userId);
-    }
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
+    int deleting(@Param("id") int id, @Param("userId") int userId);
 
     @Override
-    public Collection<Vote> getAll(int userId) {
-        return proxy.getAll(userId);
-    }
+    Vote save(Vote item);
 
-    @Override
-    public Vote getWithFields(int id, int userId) {
-        return  proxy.getWithFields(id, userId);
-    }
+    @Query("SELECT v FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
+    Vote get(@Param("id") int id, @Param("userId") int userId);
 
-    @Override
-    public Vote getWithoutUser(int id, int userId) {
-        return  proxy.getWithoutUser(id, userId);
-    }
+    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId ORDER BY v.voteDate DESC")
+    List<Vote> getAll(@Param("userId") int userId);
 
-    @Override
-    public Collection<Vote> getAllVotesForAllUsers() {
-        return proxy.getAllVotesForAllUsers();
-    }
+    @Query("SELECT v FROM Vote v JOIN FETCH v.user JOIN FETCH v.restaurant JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
+    Vote getWithFields(@Param("id") int id, @Param("userId") int userId);
+
+    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
+    Vote getWithoutUser(@Param("id") int id, @Param("userId") int userId);
+
+    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant JOIN FETCH v.menu ORDER BY v.voteDate DESC")
+    Collection<Vote> getAllVotesForAllUsers();
+
+//    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id =:id and v.user.id =:userId")
+//    Vote getWithRestaurant(@Param("id")Integer id, @Param("userId")Integer userId);
+//
+//    @Query("SELECT v FROM Vote v JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
+//    Vote getWithMenu(@Param("id")Integer id, @Param("userId")Integer userId);
+
 }

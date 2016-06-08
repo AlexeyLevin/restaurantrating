@@ -15,7 +15,7 @@ import java.util.Collection;
 public class VoteServiceImpl implements VoteService {
 
     @Autowired
-    VoteRepository repository;
+    private VoteRepository repository;
 
     @Override
     public Vote get(int id, int userId) {
