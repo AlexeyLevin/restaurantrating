@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,17 +22,21 @@ public class User extends NamedEntity {
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotEmpty
+    @Value("field1")
     protected String email;
 
     @Column(name = "password", nullable = false)
     @NotEmpty
     @Length(min = 5)
+    @Value("field2")
     protected String password;
 
     @Column(name = "enabled", nullable = false)
+    @Value("field3")
     protected boolean enabled = true;
 
     @Column(name = "registered", columnDefinition = "timestamp default now()")
+    @Value("field4")
     protected Date registered = new Date();
 
     @Enumerated(EnumType.STRING)
@@ -39,10 +44,12 @@ public class User extends NamedEntity {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Value("field5")
     protected Set<Role> roles;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
+    @Value("field6")
     protected List<Vote> votes;
 
     public User() {
