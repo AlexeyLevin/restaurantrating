@@ -2,19 +2,22 @@ package com.alev.restaurantrating.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.ManyToOne;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"menu_id", "name"}, name = "menu_dishes_idx")})
-public class Dish extends BaseEntity {
+public class Dish extends NamedEntity {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", nullable = false)
     private Menu menu;
-
-    @Column(name = "name", nullable = false)
-    private String name;
 
     @Column(name = "price", nullable = false)
     private Float price;
@@ -23,14 +26,13 @@ public class Dish extends BaseEntity {
     }
 
     public Dish(String name, Float price) {
-        this.name = name;
+        super(null, name);
         this.price = price;
     }
 
     public Dish(int id, String name, Float price) {
-        super(id);
+        super(id, name);
         this.price = price;
-        this.name = name;
     }
 
     public String getName() {
@@ -59,10 +61,10 @@ public class Dish extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Dish{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+        return "Dish{"
+                + "id=" + super.getId()
+                + ", name='" + name + '\''
+                + ", price=" + price
+                + '}';
     }
 }
