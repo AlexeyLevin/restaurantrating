@@ -34,6 +34,8 @@ public interface DataJpaMenuRepositoryImpl extends MenuRepository, JpaRepository
     Menu save(Menu menu);
 
     @Override
+    @Transactional
+    @Modifying
     default boolean delete(int id, int restaurantId) {
         return deleting(id, restaurantId) != 0;
     }
@@ -48,7 +50,7 @@ public interface DataJpaMenuRepositoryImpl extends MenuRepository, JpaRepository
     Menu get(@Param("id") int id, @Param("restaurantId") int restaurantId);
 
     @Override
-    @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.menuDate DESC")
+    @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date DESC")
     List<Menu> getAll(@Param("restaurantId") int restaurantId);
 
     @Query("SELECT m FROM Menu m JOIN FETCH m.restaurant WHERE m.id = :id and m.restaurant.id = :restaurantId")

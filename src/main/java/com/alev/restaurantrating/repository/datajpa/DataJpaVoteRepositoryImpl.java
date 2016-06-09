@@ -60,10 +60,10 @@ interface DataJpaVoteRepositoryImpl extends VoteRepository, JpaRepository<Vote, 
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant JOIN FETCH v.menu ORDER BY v.voteDate DESC")
     Collection<Vote> getAllVotesForAllUsers();
 
-//    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id =:id and v.user.id =:userId")
-//    Vote getWithRestaurant(@Param("id")Integer id, @Param("userId")Integer userId);
-//
-//    @Query("SELECT v FROM Vote v JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
-//    Vote getWithMenu(@Param("id")Integer id, @Param("userId")Integer userId);
+    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id =:id and v.user.id =:userId")
+    Vote getWithRestaurant(@Param("id")Integer id, @Param("userId")Integer userId);
+
+    @Query("SELECT v FROM Vote v JOIN FETCH v.menu WHERE v.id =:id and v.user.id =:userId")
+    Vote getWithMenu(@Param("id")Integer id, @Param("userId")Integer userId);
 
 }
