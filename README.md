@@ -4,7 +4,4 @@
 Design and implement a JSON API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend
 
 
-# restaurant-rating
-
-
 
