@@ -2,7 +2,16 @@ package com.alev.restaurantrating.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.ManyToOne;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -11,7 +20,7 @@ import java.util.Collection;
 public class Menu extends NamedEntity {
 
     @Column(name = "menu_date", nullable = false)
-    private LocalDate menuDate;
+    private LocalDate date;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,22 +38,22 @@ public class Menu extends NamedEntity {
     public Menu() {
     }
 
-    public Menu(String name, LocalDate menuDate) {
+    public Menu(String name, LocalDate date) {
         super(null, name);
-        this.menuDate = menuDate;
+        this.date = date;
     }
 
-    public Menu(Integer id, String name, LocalDate menuDate) {
+    public Menu(Integer id, String name, LocalDate date) {
         super(id, name);
-        this.menuDate = menuDate;
+        this.date = date;
     }
 
-    public LocalDate getMenuDate() {
-        return menuDate;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setMenuDate(LocalDate menuDate) {
-        this.menuDate = menuDate;
+    public void setDate(LocalDate menuDate) {
+        this.date = menuDate;
     }
 
     public Restaurant getRestaurant() {
@@ -76,7 +85,7 @@ public class Menu extends NamedEntity {
         return "Menu{" +
                 "id=" + id +
                 ", name=" + name +
-                ", menuDate=" + menuDate +
+                ", menuDate=" + date +
                 '}';
     }
 }

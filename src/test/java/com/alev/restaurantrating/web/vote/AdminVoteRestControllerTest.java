@@ -71,7 +71,7 @@ public class AdminVoteRestControllerTest extends AbstractControllerTest {
     @Test
     public void testCreate() throws Exception {
         setMaxVoteTime(LocalTime.MAX);
-        RESTAURANT_2_MENU.setMenuDate(LocalDate.now());
+        RESTAURANT_2_MENU.setDate(LocalDate.now());
         VoteTo expected = new VoteTo(new Vote(null, ADMIN, LocalDate.now(), RESTAURANT_2, RESTAURANT_2_MENU));
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -98,7 +98,7 @@ public class AdminVoteRestControllerTest extends AbstractControllerTest {
     @Test
     public void testCreateVoteError() throws Exception {
         setMaxVoteTime(LocalTime.MIN);
-        RESTAURANT_2_MENU.setMenuDate(LocalDate.now());
+        RESTAURANT_2_MENU.setDate(LocalDate.now());
         VoteTo expected = new VoteTo(new Vote(null, ADMIN, LocalDate.now(), RESTAURANT_2, RESTAURANT_2_MENU));
         mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
