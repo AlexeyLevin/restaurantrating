@@ -22,6 +22,9 @@ import static com.alev.restaurantrating.UserTestData.*;
 public class UserServiceTest extends AbstractServiceTest {
 
     @Autowired
+    private JpaUtil jpaUtil;
+
+    @Autowired
     protected UserService service;
 
     @After
@@ -85,10 +88,6 @@ public class UserServiceTest extends AbstractServiceTest {
         service.update(updated.asUser());
         USER_MATCHER.assertEquals(updated, service.get(USER_ID));
     }
-
-    @SuppressWarnings("SpringJavaAutowiringInspection")
-    @Autowired
-    private JpaUtil jpaUtil;
 
 //    @Test
 //    public void testGetWithMeals() throws Exception {

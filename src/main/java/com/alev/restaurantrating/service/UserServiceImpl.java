@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @CacheEvict(value = "users", allEntries = true)
     @Override
     public void evictCache() {
+        // This method is intentionally empty, because annotation @CacheEvict implement behavior
     }
 
     @CacheEvict(value = "users", allEntries = true)
