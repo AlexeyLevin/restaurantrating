@@ -88,11 +88,11 @@ public class MenuRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        mockMvc.perform(get(REST_URL, RESTAURANT_2_ID)
+        mockMvc.perform(get(REST_URL, RESTAURANT_3_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MENU_MATCHER.contentListMatcher(Collections.singletonList(RESTAURANT_2_MENU)));
+                .andExpect(MENU_MATCHER.contentListMatcher(Collections.singletonList(RESTAURANT_3_MENU)));
     }
 }
