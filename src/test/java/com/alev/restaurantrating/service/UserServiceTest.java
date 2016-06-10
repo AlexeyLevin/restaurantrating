@@ -9,16 +9,14 @@ import com.alev.restaurantrating.UserTestData.*;
 import com.alev.restaurantrating.model.Role;
 import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.util.exceptions.NotFoundException;
-import org.springframework.test.context.ActiveProfiles;
+
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
-import static com.alev.restaurantrating.Profiles.DATAJPA;
 import static com.alev.restaurantrating.UserTestData.*;
 
-@ActiveProfiles(DATAJPA)
 public class UserServiceTest extends AbstractServiceTest {
 
     @Autowired

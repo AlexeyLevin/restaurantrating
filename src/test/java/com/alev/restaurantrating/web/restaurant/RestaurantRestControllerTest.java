@@ -69,7 +69,7 @@ public class RestaurantRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        Restaurant expected = new Restaurant(null, "new restaurant");
+        Restaurant expected = new Restaurant(null, "New restaurant");
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(expected))

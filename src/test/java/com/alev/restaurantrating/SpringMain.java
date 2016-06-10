@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class SpringMain {
     public static void main(String[] args) {
         try (GenericXmlApplicationContext appCtx = new GenericXmlApplicationContext()) {
-            appCtx.getEnvironment().setActiveProfiles(Profiles.ACTIVE_DB, Profiles.DB_IMPLEMENTATION);
+            appCtx.getEnvironment().setActiveProfiles(Profiles.ACTIVE_DB);
             appCtx.load("spring/spring-app.xml", "spring/spring-db.xml", "spring/spring-mvc.xml");
             appCtx.refresh();
 

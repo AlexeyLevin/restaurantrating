@@ -16,8 +16,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.annotation.PostConstruct;
 
-import static com.alev.restaurantrating.Profiles.DATAJPA;
-import static com.alev.restaurantrating.Profiles.POSTGRES;
+import static com.alev.restaurantrating.Profiles.ACTIVE_DB;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
 @ContextConfiguration({
@@ -28,7 +27,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-@ActiveProfiles({POSTGRES, DATAJPA})
+@ActiveProfiles(ACTIVE_DB)
 abstract public class AbstractControllerTest {
 
     private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();

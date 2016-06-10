@@ -11,9 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static com.alev.restaurantrating.ModelTestData.*;
-import static com.alev.restaurantrating.Profiles.DATAJPA;
 
-@ActiveProfiles(DATAJPA)
 public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Autowired

@@ -13,14 +13,12 @@ import java.util.Collection;
 import java.util.Collections;
 
 import static com.alev.restaurantrating.ModelTestData.*;
-import static com.alev.restaurantrating.Profiles.DATAJPA;
 import static com.alev.restaurantrating.UserTestData.USER;
 import static com.alev.restaurantrating.UserTestData.USER_ID;
 import static com.alev.restaurantrating.util.VoteUtil.DEFAULT_MAX_VOTE_TIME;
 import static com.alev.restaurantrating.util.VoteUtil.setMaxVoteTime;
 import static junit.framework.TestCase.assertTrue;
 
-@ActiveProfiles(DATAJPA)
 public class VoteServiceTest extends AbstractServiceTest {
 
     @Autowired

@@ -10,10 +10,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 import static com.alev.restaurantrating.ModelTestData.*;
-import static com.alev.restaurantrating.Profiles.DATAJPA;
 import static org.junit.Assert.assertTrue;
 
-@ActiveProfiles(DATAJPA)
 public class MenuServiceTest extends AbstractServiceTest {
 
     @Autowired
@@ -68,8 +66,8 @@ public class MenuServiceTest extends AbstractServiceTest {
 
     @Test
     public void testWithDishes() {
-        Menu withDishes = service.getWithDishes(RESTAURANT_1_MENU_ID);
-        MENU_MATCHER.assertEquals(RESTAURANT_1_MENU ,withDishes);
-        DISH_MATCHER.assertCollectionEquals(DISH_LIST_1, withDishes.getDishes());
+        Menu withDishes = service.getWithDishes(RESTAURANT_2_MENU_ID);
+        MENU_MATCHER.assertEquals(RESTAURANT_2_MENU ,withDishes);
+        DISH_MATCHER.assertCollectionEquals(DISH_LIST_2, withDishes.getDishes());
     }
 }

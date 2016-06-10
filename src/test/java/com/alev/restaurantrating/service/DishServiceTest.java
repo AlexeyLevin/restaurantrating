@@ -9,9 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.Arrays;
 
 import static com.alev.restaurantrating.ModelTestData.*;
-import static com.alev.restaurantrating.Profiles.DATAJPA;
 
-@ActiveProfiles(DATAJPA)
 public class DishServiceTest extends AbstractServiceTest {
 
     @Autowired

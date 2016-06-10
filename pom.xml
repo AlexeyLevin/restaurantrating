@@ -101,7 +101,7 @@
                     <contextFile>src/main/resources/tomcat/context.xml</contextFile>
                     <systemProperties>
                         <file.encoding>UTF-8</file.encoding>
-                        <spring.profiles.active>tomcat,datajpa</spring.profiles.active>
+                        <spring.profiles.active>hsqldb</spring.profiles.active>
                     </systemProperties>
                     <protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
                 </configuration>
@@ -327,7 +327,7 @@
                 </dependency>
             </dependencies>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
         <profile>
@@ -336,9 +336,12 @@
                 <dependency>
                     <groupId>org.hsqldb</groupId>
                     <artifactId>hsqldb</artifactId>
-                    <version>2.3.2</version>
+                    <version>2.3.3</version>
                 </dependency>
             </dependencies>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
 
