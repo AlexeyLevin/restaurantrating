@@ -1,8 +1,7 @@
-package com.alev.restaurantrating.repository.datajpa;
+package com.alev.restaurantrating.repository;
 
 import com.alev.restaurantrating.model.Dish;
 import com.alev.restaurantrating.model.Menu;
-import com.alev.restaurantrating.repository.DishRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-interface DataJpaDishRepositoryImpl extends JpaRepository<Dish, Integer>, DishRepository {
+interface DishRepositoryImpl extends JpaRepository<Dish, Integer>, DishRepository {
 
     @Override
     @Transactional

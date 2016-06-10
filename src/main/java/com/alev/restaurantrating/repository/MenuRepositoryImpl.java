@@ -1,8 +1,7 @@
-package com.alev.restaurantrating.repository.datajpa;
+package com.alev.restaurantrating.repository;
 
 import com.alev.restaurantrating.model.Menu;
 import com.alev.restaurantrating.model.Restaurant;
-import com.alev.restaurantrating.repository.MenuRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public interface DataJpaMenuRepositoryImpl extends MenuRepository, JpaRepository<Menu, Integer> {
+public interface MenuRepositoryImpl extends MenuRepository, JpaRepository<Menu, Integer> {
 
     @Query("SELECT r FROM Restaurant r WHERE r.id=:id")
     Restaurant getRestaurant(@Param("id") int id);

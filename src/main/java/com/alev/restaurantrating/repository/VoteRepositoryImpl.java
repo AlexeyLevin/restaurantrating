@@ -1,8 +1,7 @@
-package com.alev.restaurantrating.repository.datajpa;
+package com.alev.restaurantrating.repository;
 
 import com.alev.restaurantrating.model.User;
 import com.alev.restaurantrating.model.Vote;
-import com.alev.restaurantrating.repository.VoteRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-interface DataJpaVoteRepositoryImpl extends VoteRepository, JpaRepository<Vote, Integer> {
+interface VoteRepositoryImpl extends VoteRepository, JpaRepository<Vote, Integer> {
 
     @Query("SELECT u FROM User u WHERE u.id=:id")
     User getUser(@Param("id") int id);

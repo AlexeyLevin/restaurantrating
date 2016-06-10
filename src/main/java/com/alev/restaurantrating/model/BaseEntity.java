@@ -1,6 +1,12 @@
 package com.alev.restaurantrating.model;
 
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.SequenceGenerator;
 
 /**
  * Simple JavaBean domain object with an id property.

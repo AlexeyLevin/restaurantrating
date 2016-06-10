@@ -86,7 +86,7 @@
               p:entityManagerFactory-ref="entityManagerFactory"/>
 
         <bean class="com.alev.restaurantrating.repository.JpaUtil"/>
-        <context:component-scan base-package="com.alev.restaurantrating.**.repository.datajpa"/>
-        <jpa:repositories base-package="com.alev.restaurantrating.**.repository.datajpa"/>
+        <context:component-scan base-package="com.alev.restaurantrating.**.repository"/>
+        <jpa:repositories base-package="com.alev.restaurantrating.**.repository"/>
     </beans>
 </beans>

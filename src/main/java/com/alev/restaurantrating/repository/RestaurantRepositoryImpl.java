@@ -1,7 +1,6 @@
-package com.alev.restaurantrating.repository.datajpa;
+package com.alev.restaurantrating.repository;
 
 import com.alev.restaurantrating.model.Restaurant;
-import com.alev.restaurantrating.repository.RestaurantRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-interface DataJpaRestaurantRepositoryImpl extends RestaurantRepository, JpaRepository<Restaurant, Integer> {
+interface RestaurantRepositoryImpl extends RestaurantRepository, JpaRepository<Restaurant, Integer> {
     Sort SORT_NAME = new Sort("name");
 
     @Override
