@@ -51,11 +51,11 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public Vote getWithFields(int id, int userId) {
-        return repository.getWithFields(id, userId);
+        return ExceptionUtil.check(repository.getWithFields(id, userId), id);
     }
 
     public Vote getWithoutUser(int id, int userId) {
-        return repository.getWithoutUser(id, userId);
+        return ExceptionUtil.check(repository.getWithoutUser(id, userId), id);
     }
 
     @Override
